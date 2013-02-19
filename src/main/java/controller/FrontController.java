@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
+import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,14 +14,23 @@ public class FrontController extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.print("front controller");
-		String className = request.getServletPath().substring(1, request.getServletPath().indexOf(".action"));
+		System.out.println("dfd");
+		System.out.println("front controllerdfsdlfjldsjf");
+		System.out.println("*"+request.getServletPath()+"*");
+		int index=request.getServletPath().indexOf(".action");
+		String className =null;
 		try {
 			Class<?> ctrlClass = null;
-			if(className == null) {
+			if(index<0) {
+				if (request.getServletPath().indexOf("Logout")>=0){
+					request.getSession().invalidate();
+					response.sendRedirect("/library2/login.jsp");
+				}
+					
 				ctrlClass = Class.forName("controller.home");
 			}
 			else {
+				className= request.getServletPath().substring(1, index);
 				ctrlClass = Class.forName("controller." + className);
 			}
 			

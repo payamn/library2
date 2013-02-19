@@ -23,7 +23,7 @@
     <link rel="shortcut icon" href="img/icon-small.jpg">
     <script src="js/jquery.min.js"></script>
     <script>
-      $(function() {
+      /*$(function() {
         
         var pID = $("div#pID").html();
         if(pID == null || pID == "")
@@ -35,19 +35,6 @@
         }
         else{
         }
-
-        $("input#signin-btn").click(function(){
-          var patt=/@/gi;
-          if ($("input#email").val() == null || $("input#email").val() == ""){
-            alert("Email cannot be empty");
-          }
-          else if(patt.test($("input#email").val()) == false) {
-            alert("Email must have the format 'someone@somewhere.sth'");
-          }
-          else{
-            $("form#signin").submit();
-          }
-        });
 
         $("input#searchAuction").click(function(){
           if(pID >= 0){
@@ -84,7 +71,7 @@
             alert("You should Login first");
           }
         });
-      });
+      });*/
     </script>
 
   </head>
@@ -119,10 +106,8 @@
               </li>
             </ul>
             <div id="auth">
-              <form id="signin" class="navbar-form pull-right" action="Login.action" method="post">
-                <input id="email" name="email" class="span2" type="text" placeholder="Email">
-                <input id="password" name="password" class="span2" type="password" placeholder="Password">
-                <input type="button" id="signin-btn" class="btn" value="Sign in"/>
+              <form id="signin" class="navbar-form pull-right" action="Logout" method="post">
+                <input type="submit" id="signout-btn" class="btn" value="Sign out"/>
               </form>
             </div>
           </div>
@@ -138,7 +123,7 @@
 			<%= "Message: " + request.getAttribute("message")%>
 			<% } %>
         </p><br>
-        <h1>Hello <%= ((request.getAttribute("name") == null)?"Newbie":request.getAttribute("name")) %>!</h1>
+        <h1>Hello <%= ((request.getUserPrincipal().getName().substring(0, request.getUserPrincipal().getName().indexOf("@")) == null)?"Newbie":request.getUserPrincipal().getName().substring(0, request.getUserPrincipal().getName().indexOf("@"))) %>!</h1>
         <p>This is the place for all the book lovers.</p>
  
 		
