@@ -50,8 +50,5 @@ public class Offer {
 	public Person getPerson() {
 		return this.person;
 	}
-	public OfferView getView() {
-		// TODO Auto-generated method stub
-		return new OfferView(id,price, person.getView(), offerDate);
-	}
+	
 }

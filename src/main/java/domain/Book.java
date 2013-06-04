@@ -72,10 +72,5 @@ public class Book {
 	public Auction getAuction() {
 		return auction;
 	}
-	public BookView getView() {
-		// TODO Auto-generated method stub
-		System.out.println("in book getview");
-		System.out.println(id+name+writerName+publishYear+quality);
-		return new BookView(id,name,writerName,publishYear,quality);
-	}
+	
 }

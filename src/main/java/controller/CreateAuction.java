@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.Library;
-import domain.Objectvalue;
+import domain.Quality;
+
 import exceptions.BookIsExist;
 import exceptions.PersonNotFoundException;
 
@@ -42,18 +43,20 @@ public class CreateAuction  {
 		String endYearStr=req.getParameter("endYear");
 		//int endYear=Integer.parseInt(endYearStr);
 
-		Objectvalue obj=new Objectvalue();
+		
+		//(int sellerId,String bookName,String bookWriter ,int publishYear,Quality quality,Date startDate,Date endDate,int price )
+		
 		try{
-			obj.setAuctionEndDate(makeDate(endDayStr,endMonthStr,endYearStr));
-			obj.setAuctionStartDate(makeDate(startDayStr,startMonthStr,startYearStr));
-			obj.setBookName(bookName);
+			Date endDate=makeDate(endDayStr,endMonthStr,endYearStr);
+			Date startDate=makeDate(startDayStr,startMonthStr,startYearStr);
+			/*obj.setBookName(bookName);
 			obj.setBookWriter(writerName+" "+writerSurName);
 			obj.setSellerId(Integer.parseInt(req.getParameter("personId")));
 			obj.setPrice(minPrice);
 			obj.setPublishyear(publishYear);
 
-			obj.setQuality(quality);
-			Library.createAuction(obj);
+			obj.setQuality(quality);*/
+			Library.createAuction(Integer.parseInt(req.getParameter("personId")),bookName,writerName+" "+writerSurName,publishYear,quality,startDate,endDate,minPrice);
 
 			req.setAttribute("message","auction has been created successfully!");
 		}catch(ParseException e){

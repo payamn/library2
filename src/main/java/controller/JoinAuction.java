@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.Library;
-import domain.Objectvalue;
+
 import exceptions.AuctionNotFoundException;
 import exceptions.PersonNotFoundException;
 import exceptions.closeTimeException;
@@ -16,14 +16,14 @@ public class JoinAuction {
 		int auctionId=Integer.parseInt(req.getParameter("auctionId"));
 		int price=Integer.parseInt(req.getParameter("price"));
 		req.setAttribute("personId",personId);
-		Objectvalue OV=new Objectvalue ();
-		OV.setPersonId(personId);
-		OV.setAuctionId(auctionId);
 		
-		OV.setPrice(price);
+		//(int personId,int auctionId,int price)
+		
+		
+		
 		try {
 			System.out.print("joinshYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYsssssssssssss");
-			Library.joinToAuction(OV);
+			Library.joinToAuction(personId,auctionId,price);
 			req.setAttribute("message", "your have been joined to auction successfully! ");
 			System.out.print("joinshssssssssssssssssssssssssssssssssssssssssssssss");
 		} catch (AuctionNotFoundException e) {

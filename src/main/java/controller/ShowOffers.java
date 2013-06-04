@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.Auction;
-import domain.AuctionView;
+
 import domain.Library;
-import domain.Objectvalue;
+
 import exceptions.AuctionNotFoundException;
 
 public class ShowOffers {
@@ -17,10 +17,9 @@ public class ShowOffers {
 		int id=Integer.parseInt(req.getParameter("auctionId"));
 		//req.setAttribute("personId", arg1)
 		req.setAttribute("personId",req.getParameter("personId"));
-		Objectvalue ov=new Objectvalue();
-		ov.setAuctionId(id);
+		
 		try{
-			AuctionView auc= Library.getAuctionById(ov).getFindedAuctions().get(0);
+			Auction auc= Library.getAuctionById(id);
 			req.setAttribute("auction",auc);
 			if(auc.getOffers().size()==0){
 				//return "CloseAuctionList.jsp";

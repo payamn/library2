@@ -144,19 +144,6 @@ public class Auction {
 		return offers;
 		
 	}
-	public AuctionView getView(){
-		System.out.println("in");
-		List<OfferView> offerViews=new ArrayList ();
-		int i=0;
-		for (Offer of : offers){
-				offerViews.add(of.getView());
-		}
-		System.out.println("end getview");
-		if (book==null)
-			System.out.println("mjlklsdjf");
-		System.out.println(book.getName());
-		return new AuctionView( id,this.book.getView(), startDate,  endDate,  offerViews,person.getView());
-		
-	}
+	
 	
 }

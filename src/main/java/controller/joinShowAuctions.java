@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.Auction;
-import domain.AuctionView;
+
 import domain.Library;
-import domain.Objectvalue;
+
 import exceptions.PersonNotFoundException;
 
 public class joinShowAuctions {
@@ -16,14 +16,13 @@ public class joinShowAuctions {
 	public String execute(HttpServletRequest req, HttpServletResponse response){
 		System.out.println("show list for join");
 		int personId=Integer.parseInt(req.getParameter("personId") );
-		Objectvalue ov=new Objectvalue();
-		ov.setPersonId(personId);
+		//Objectvalue ov=new Objec
 		req.setAttribute("personId",personId);
 		
-		List<AuctionView> auctions=null;
+		List<Auction> auctions=null;
 		try {
 			System.out.println("befor Library.searchAllAvailableAuctionsOfPerson(ov).getFindedAuctions();");
-			auctions = Library.searchAllAvailableAuctionsOfPerson(ov).getFindedAuctions();
+			auctions = Library.searchAllAvailableAuctionsOfPerson(personId);
 			System.out.println("after Library.searchAllAvailableAuctionsOfPerson(ov).getFindedAuctions();");
 			
 		} catch (PersonNotFoundException e) {
@@ -31,7 +30,7 @@ public class joinShowAuctions {
 			
 			e.printStackTrace();
 		}
-		for(AuctionView au : auctions){
+		for(Auction au : auctions){
 			if(au==null)
 				System.out.print("nULLLLLLLLLLLLLLLLLLLL");
 		}

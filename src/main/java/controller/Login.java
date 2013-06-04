@@ -4,18 +4,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.Library;
-import domain.Objectvalue;
+
 import exceptions.PersonNotFoundException;
 
 public class Login{
 
 
 	public String execute(HttpServletRequest req, HttpServletResponse response)  {
-		// TODO Auto-generated method stub
-		Objectvalue OV=new Objectvalue();
-		OV.setMail(req.getParameter("email"));
+	
+		
 		try{
-			req.setAttribute("personId", Library.getIdByMail(OV));
+			req.setAttribute("personId", Library.getIdByMail(req.getParameter("email")));
 			
 		
 		}catch(PersonNotFoundException e){

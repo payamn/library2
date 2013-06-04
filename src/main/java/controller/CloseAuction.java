@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.Library;
-import domain.Objectvalue;
+
 import exceptions.AuctionNotFoundException;
 import exceptions.PersonNotFoundException;
 import exceptions.closeTimeException;
@@ -23,13 +23,15 @@ public class CloseAuction {
 		int winnerId=Integer.parseInt(req.getParameter("winnerId"));
 		System.out.println("3333");
 		req.setAttribute("personId",sellerId);
-		Objectvalue obj=new Objectvalue ();
-		obj.setAuctionId(auctionId);
+		
+		//int sellerId,int personId,int auctionId)
+		
+		/*obj.setAuctionId(auctionId);
 		obj.setPersonId(winnerId);
-		obj.setSellerId(sellerId);
+		obj.setSellerId(sellerId);*/
 		try{
 			System.out.print("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
-			Library.finishAuction(obj);
+			Library.finishAuction(sellerId,winnerId,auctionId);
 		
 			System.out.print("Oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
 			req.setAttribute("message", "auction has been closed successfully !");

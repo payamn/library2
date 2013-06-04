@@ -57,11 +57,6 @@ public class Person {
 	public String getName(){
 		return profile.getFirstName()+" "+profile.getLastName();
 	}
-		public PersonView getView() {
-		
-		// TODO Auto-generated method stub
-		System.out.println("in person.getview");
-		return new PersonView(id,profile.getFirstName()+" "+profile.getLastName());
-	}
+
 	
 }
