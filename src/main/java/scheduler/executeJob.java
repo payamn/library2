@@ -1,0 +1,23 @@
+package scheduler;
+
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
+import domain.Library;
+import exceptions.AuctionNotFoundException;
+
+public class executeJob implements Job{
+
+	public void execute(JobExecutionContext exeInfo) throws JobExecutionException {
+		System.out.println("IN execute job");
+		System.out.println("auction ID: "+exeInfo.getJobDetail().getJobDataMap().getInt("auctionId"));
+		
+		try {
+			Library.finishExpiredAuction(exeInfo.getJobDetail().getJobDataMap().getInt("auctionId"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
