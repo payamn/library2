@@ -1,6 +1,6 @@
-package mail;
+package domain.mail;
 
-import domain.Person;
+import domain.model.Person;
 
 import java.util.Properties;
 import javax.mail.Message;

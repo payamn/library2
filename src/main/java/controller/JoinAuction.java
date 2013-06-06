@@ -3,24 +3,21 @@ package controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.Library;
+import domain.exceptions.AuctionNotFoundException;
+import domain.exceptions.PersonNotFoundException;
+import domain.exceptions.closeTimeException;
+import domain.exceptions.priceException;
+import domain.model.Library;
 
-import exceptions.AuctionNotFoundException;
-import exceptions.PersonNotFoundException;
-import exceptions.closeTimeException;
-import exceptions.priceException;
 
 public class JoinAuction {
 	public String execute(HttpServletRequest req, HttpServletResponse response) {
+		
 		int personId=Integer.parseInt(req.getParameter("personId") );
 		int auctionId=Integer.parseInt(req.getParameter("auctionId"));
 		int price=Integer.parseInt(req.getParameter("price"));
 		req.setAttribute("personId",personId);
-		
-		//(int personId,int auctionId,int price)
-		
-		
-		
+
 		try {
 			System.out.print("joinshYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYsssssssssssss");
 			Library.joinToAuction(personId,auctionId,price);
@@ -41,12 +38,6 @@ public class JoinAuction {
 		}
 		System.out.print("JOINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNEd");
 		
-		return  "joinShowAuctions.action";
-		
-		//return "Bookstore.jsp";
-		
-		
-		
+		return  "joinShowAuctions.action";	
 	}
-
 }

@@ -1,16 +1,16 @@
-package domain;
+package domain.model;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import exceptions.AuctionNotFoundException;
-import exceptions.BookIsExist;
-import exceptions.PersonNotFoundException;
-import exceptions.closeTimeException;
-import exceptions.priceException;
-import scheduler.JobScheduler;
-import database.DBConnector;
+import domain.database.DBConnector;
+import domain.exceptions.AuctionNotFoundException;
+import domain.exceptions.BookIsExist;
+import domain.exceptions.PersonNotFoundException;
+import domain.exceptions.closeTimeException;
+import domain.exceptions.priceException;
+import domain.scheduler.JobScheduler;
 
 public class Library {
 	public static Auction getAuctionById(int  auctionId) throws AuctionNotFoundException {

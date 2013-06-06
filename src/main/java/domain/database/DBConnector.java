@@ -1,4 +1,4 @@
-package database;
+package domain.database;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,14 +7,14 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import domain.Auction;
-import domain.Book;
-import domain.Offer;
-import domain.Person;
-import domain.Profile;
-import domain.Quality;
-import exceptions.AuctionNotFoundException;
-import exceptions.PersonNotFoundException;
+import domain.exceptions.AuctionNotFoundException;
+import domain.exceptions.PersonNotFoundException;
+import domain.model.Auction;
+import domain.model.Book;
+import domain.model.Offer;
+import domain.model.Person;
+import domain.model.Profile;
+import domain.model.Quality;
 
 public class DBConnector {
 

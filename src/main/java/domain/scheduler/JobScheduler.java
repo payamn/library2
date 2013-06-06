@@ -1,4 +1,4 @@
-package scheduler;
+package domain.scheduler;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

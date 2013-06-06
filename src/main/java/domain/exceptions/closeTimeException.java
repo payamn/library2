@@ -1,4 +1,4 @@
-package exceptions;
+package domain.exceptions;
 
 public class closeTimeException extends Exception{
 	/**

@@ -6,23 +6,17 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.Auction;
 
-import domain.Library;
-
+import domain.model.Auction;
+import domain.model.Library;
 
 public class searchAuction {
 
-
 	public String execute(HttpServletRequest req, HttpServletResponse response)
 			throws IOException {
-		// TODO Auto-generated method stub
 		
 		String searchType=req.getParameter("searchType");
 		List <Auction> auctions = null;
-	//	Objectvalue outputOV = null;
-	//	Objectvalue ov = new Objectvalue();
-		
 		int personId=(Integer.parseInt(req.getParameter("personId")));
 		req.setAttribute("personId",req.getParameter("personId"));
 		if(searchType.equals("bookName")){
@@ -39,7 +33,6 @@ public class searchAuction {
 
 			//int personId,String bookWriter
 			auctions=Library.searchAuctionByBookWriter(personId,bookWriter);
-
 		}
 		else if(searchType.equals("sellerName")){
 			String Name=req.getParameter("sellerName");
@@ -47,9 +40,7 @@ public class searchAuction {
 		
 			///int personId,String SellerFirstName,String SellerLastName
 			auctions=Library.searchAuctionByOwner(personId,Name,surName);
-		}
-		
-			
+		}	
 		System.out.print("sssssssssssssssssssssssssssssssssssssssssize"+auctions.size());
 		System.out.println("NUM of auctions "+auctions.size());
 		req.setAttribute("auctions",auctions );

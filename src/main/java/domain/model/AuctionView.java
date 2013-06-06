@@ -1,4 +1,4 @@
-package domain;
+package domain.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -18,9 +18,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import mail.MailSender;
-import exceptions.closeTimeException;
-import exceptions.priceException;
+import domain.exceptions.closeTimeException;
+import domain.exceptions.priceException;
+import domain.mail.MailSender;
+
 
 public class AuctionView {
 	

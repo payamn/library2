@@ -1,16 +1,22 @@
-package domain;
+package test;
 
 import java.util.Date;
 import java.util.HashSet;
 
 import org.hibernate.Session;
 
-import exceptions.AuctionNotFoundException;
-import exceptions.PersonNotFoundException;
-import exceptions.closeTimeException;
-import exceptions.priceException;
 
-import database.HibernateUtil;
+import domain.database.HibernateUtil;
+import domain.exceptions.AuctionNotFoundException;
+import domain.exceptions.PersonNotFoundException;
+import domain.exceptions.closeTimeException;
+import domain.exceptions.priceException;
+import domain.model.Auction;
+import domain.model.Book;
+import domain.model.Offer;
+import domain.model.Person;
+import domain.model.Profile;
+import domain.model.Quality;
 
 public class App {
 

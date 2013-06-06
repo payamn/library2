@@ -1,11 +1,11 @@
-package scheduler;
+package domain.scheduler;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import domain.Library;
-import exceptions.AuctionNotFoundException;
+import domain.exceptions.AuctionNotFoundException;
+import domain.model.Library;
 
 public class executeJob implements Job{
 
