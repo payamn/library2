@@ -10,7 +10,7 @@ import exceptions.PersonNotFoundException;
 import exceptions.closeTimeException;
 import exceptions.priceException;
 import scheduler.JobScheduler;
-import sql.DBConnector;
+import database.DBConnector;
 
 public class Library {
 	public static Auction getAuctionById(int  auctionId) throws AuctionNotFoundException {

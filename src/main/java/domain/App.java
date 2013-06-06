@@ -10,7 +10,7 @@ import exceptions.PersonNotFoundException;
 import exceptions.closeTimeException;
 import exceptions.priceException;
 
-import sql.HibernateUtil;
+import database.HibernateUtil;
 
 public class App {
 
