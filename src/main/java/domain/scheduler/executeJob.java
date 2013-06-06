@@ -4,7 +4,6 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import domain.exceptions.AuctionNotFoundException;
 import domain.model.Library;
 
 public class executeJob implements Job{

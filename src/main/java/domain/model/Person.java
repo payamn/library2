@@ -35,7 +35,7 @@ public class Person {
 	}
 	public Person(Profile profile, Set<Auction> auctions) {
 		this.profile = profile;
-		this.auctions = auctions;
+		this.setAuctions(auctions);
 	}
 	public int getId() {
 		return this.id;
@@ -57,6 +57,10 @@ public class Person {
 	public String getName(){
 		return profile.getFirstName()+" "+profile.getLastName();
 	}
-
-	
+	public Set<Auction> getAuctions() {
+		return auctions;
+	}
+	public void setAuctions(Set<Auction> auctions) {
+		this.auctions = auctions;
+	}
 }

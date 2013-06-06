@@ -16,8 +16,7 @@ import org.hibernate.annotations.Parameter;
 @Table
 public class Book {
 
-	@GenericGenerator(name = "generator", strategy = "foreign", 
-			parameters = @Parameter(name = "property", value = "auction"))
+	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "auction"))
 	@Id
 	@GeneratedValue(generator = "generator")
 	@Column(name="id", unique = true, nullable = false)
@@ -29,7 +28,6 @@ public class Book {
 	private String writerName;
 	private int publishYear;
 	private Quality quality;
-
 	public Book() {
 	}
 	public void setAuction(Auction auction) {
@@ -68,9 +66,7 @@ public class Book {
 		else
 			return "normal";
 	}
-	
 	public Auction getAuction() {
 		return auction;
 	}
-	
 }

@@ -1,6 +1,5 @@
 package domain.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,22 +9,19 @@ import domain.exceptions.BookIsExist;
 import domain.exceptions.PersonNotFoundException;
 import domain.exceptions.closeTimeException;
 import domain.exceptions.priceException;
-import domain.scheduler.JobScheduler;
 
 public class Library {
 	public static Auction getAuctionById(int  auctionId) throws AuctionNotFoundException {
-	
-        return DBConnector.getAuction(auctionId);
-       
+		return DBConnector.getAuction(auctionId);  
 	}
-	public static void  createAuction(int sellerId,String bookName,String bookWriter ,int publishYear,String qualityStr,Date startDate,Date endDate,int price ) throws BookIsExist, PersonNotFoundException {
-
+	public static void  createAuction(int sellerId,String bookName,String bookWriter
+			,int publishYear,String qualityStr,Date startDate,Date endDate,int price )
+					throws BookIsExist, PersonNotFoundException {
 		List<Book> books = DBConnector.getBooks(bookName,bookWriter, publishYear);
 		for(Book b : books) {
 			if(b.getAuction().getPerson().getId() == sellerId)
 				throw new BookIsExist("BookIsExist Exception : Book with this owner is exist in DB .");
-		}
-		
+		}	
 		Quality quality=Quality.GOOD ;
 		if(qualityStr.equalsIgnoreCase("BAD"))
 			quality=Quality.BAD;
@@ -40,12 +36,10 @@ public class Library {
 		Book book = new Book(bookName, bookWriter, publishYear, quality);
 		Person person = DBConnector.getPerson(sellerId);
 		Auction auction = new Auction(book, startDate, endDate, price);
-		
-
 		auction.setPerson(person);
 		book.setAuction(auction);
 		DBConnector.saveAuction(auction);	
-	//	JobScheduler.createNewJob(OV.getAuctionEndDate(), auction.getId());
+		//	JobScheduler.createNewJob(OV.getAuctionEndDate(), auction.getId());
 	}
 	public static void joinToAuction(int personId,int auctionId,int price) throws AuctionNotFoundException, PersonNotFoundException, closeTimeException, priceException {
 		Auction auction = DBConnector.getAuction(auctionId);
@@ -80,36 +74,36 @@ public class Library {
 	}
 	public static List<Auction> searchAuctionByBookName(int personId,String bookName) {
 		return DBConnector.findAuctionByBookName(bookName, personId);
-	
+
 	}
 	public static List<Auction> searchAuctionByBookWriter(int personId,String bookWriter) {
 		return DBConnector.findAuctionByWriterName(bookWriter, personId);
-		
+
 	}
 	public static List<Auction> searchAuctionByOwner(int personId,String SellerFirstName,String SellerLastName) {
 		return(DBConnector.findAuctionByBookName(SellerFirstName, SellerLastName, personId));
-		
+
 	}
 	public static  List<Auction> getActiveAuctionByOwner(int sellerId) throws PersonNotFoundException {
 		System.out.println("Hello I am getActiveAuctionByOwner in Library .");
 		System.out.println("getActiveAuctionByOwner in Library : "+sellerId);
-		
+
 		return ( DBConnector.findAuctionByOwner(sellerId));
-		
+
 	}
 	public static List<Auction>  searchAllAvailableAuctionsOfPerson(int personId) throws PersonNotFoundException {
-		
-	
-		
+
+
+
 		return (DBConnector.findAuctionByForPerson(personId));
-	
+
 	}
 	public static int getIdByMail(String mail) throws PersonNotFoundException {
 		return DBConnector.getPersonByMail(mail).getId();
 	}
 	public static List<Auction> getRecentlyAddedAuctions(Date date) {
 		return DBConnector.findRecentlyAddedAuctions(date);
-	
+
 	}
 	public static List<Person> getProfiles() {
 		return null;

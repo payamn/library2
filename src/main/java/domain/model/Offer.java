@@ -50,5 +50,4 @@ public class Offer {
 	public Person getPerson() {
 		return this.person;
 	}
-	
 }

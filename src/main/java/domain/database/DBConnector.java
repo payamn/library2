@@ -14,7 +14,6 @@ import domain.model.Book;
 import domain.model.Offer;
 import domain.model.Person;
 import domain.model.Profile;
-import domain.model.Quality;
 
 public class DBConnector {
 
@@ -70,7 +69,7 @@ public class DBConnector {
 
 		@SuppressWarnings("unchecked")
 		List<Book> resultList = query.list();
-		List<Auction> result = new ArrayList();
+		List<Auction> result = new ArrayList<Auction>();
 		for(Book b : resultList) {
 			if(b.getAuction().getPerson().getId() != personId && !b.getAuction().isFinished()) {
 				result.add(b.getAuction());
@@ -84,7 +83,7 @@ public class DBConnector {
 
 		@SuppressWarnings("unchecked")
 		List<Book> resultList = query.list();
-		List<Auction> result = new ArrayList();
+		List<Auction> result = new ArrayList<Auction>();
 		for(Book b : resultList) {
 			if(b.getAuction().getPerson().getId() != personId && !b.getAuction().isFinished()) {
 				result.add(b.getAuction());
@@ -97,7 +96,7 @@ public class DBConnector {
 		Query query = session.createQuery("From Auction");
 		@SuppressWarnings("unchecked")
 		List<Auction> resultList = query.list();
-		List<Auction> result = new ArrayList();
+		List<Auction> result = new ArrayList<Auction>();
 		for(Auction a : resultList) {
 			if(a.getPerson().getProfile().getFirstName().equals(sellerFirstName) &&
 					a.getPerson().getProfile().getLastName().equals(sellerLastName) && 
@@ -112,7 +111,7 @@ public class DBConnector {
 		Query query = session.createQuery("From Auction");
 		@SuppressWarnings("unchecked")
 		List<Auction> resultList = query.list();
-		List<Auction> result = new ArrayList();
+		List<Auction> result = new ArrayList<Auction>();
 		for(Auction a : resultList) {
 			if(a.getPerson().getId() == personId && !a.isFinished()) {
 				System.out.println("finded person in  findAuctionByOwner in DBConnector : "+a.getPerson());
@@ -127,7 +126,7 @@ public class DBConnector {
 		Query query = session.createQuery("From Auction");
 		@SuppressWarnings("unchecked")
 		List<Auction> resultList = query.list();
-		List<Auction> result = new ArrayList();
+		List<Auction> result = new ArrayList<Auction>();
 		for(Auction a : resultList) {
 			if(a.getPerson().getId() != personId && !a.isFinished() && a.getId()!=0) {
 				result.add(a);
@@ -139,7 +138,7 @@ public class DBConnector {
 		Query query = session.createQuery("From Profile");
 		@SuppressWarnings("unchecked")
 		List<Profile> resultList = query.list();
-		List<Person> result = new ArrayList();
+		List<Person> result = new ArrayList<Person>();
 		for(Profile p : resultList) {
 			if(p.getMail().equals(mail)) {
 				System.out.println("profile : "+p);
