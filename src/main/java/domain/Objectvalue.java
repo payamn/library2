@@ -34,7 +34,7 @@ public class Objectvalue {
 	public void setPassword(String m){
 		password=m;
 	}
-
+	// alaki
 	public int getProfileId() {
 		return profileId;
 	}
