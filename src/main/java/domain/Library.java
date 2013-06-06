@@ -107,4 +107,12 @@ public class Library {
 	public static int getIdByMail(String mail) throws PersonNotFoundException {
 		return DBConnector.getPersonByMail(mail).getId();
 	}
+	public static List<Auction> getRecentlyAddedAuctions(Date date) {
+		return DBConnector.findRecentlyAddedAuctions(date);
+	
+	}
+	public static List<Person> getProfiles() {
+		return null;
+		//return DBConnector.getPersons();
+	}
 }

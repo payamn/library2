@@ -134,56 +134,128 @@
             <div class="hero-unit">
                 <p>Message: <%= request.getAttribute("message")%>
                 </p><br>
-                <h1>Hello!</h1>
-                <p>This is the place for all the book lovers.</p>
-                <p>Search for books here:</p>
-                <p>
-                <form id="searchAuction" action="SearchAuction.jsp">
-                    <input type="hidden" name="personId" value="<%= request.getAttribute("personId")%>"/>
-                    <input type="button" id="searchAuction" class="btn btn-primary btn-Large" value="Search &raquo;"/>
-                </form>
-                </p>
-            </div>
+			 <h1>Hello!</h1>
+			<p>This is the place for all the book lovers.</p>
+	 
+			
+		  </div>  
 
-            <div class="row">
-                <div class="span4">
-                    <h2>Create Auction</h2>
-                    <p>If you have a book that you want to sell, here is the place for you. You can create an auction by filling the form.</p>
-                    <p>
-                    <form id="createAuction" action="CreateAuction.jsp">
-                        <input type="hidden" name="personId" value="<%= request.getAttribute("personId")%>"/>
-                        <input type="button" id="createAuction" class="btn btn-warning" value="Create an Auction &raquo;"/>
-                    </form>
-                    </p>
-                </div>
-                <div class="span4">
-                    <h2>Join Auction</h2>
-                    <p>Need a book? Here you can search for a book or see all the available books. Then you can join the auction and bid for it</p>
-                    <p>
-                    <form id="joinAuction" action="joinShowAuctions.action">
-                        <input type="hidden" name="personId" value="<%= request.getAttribute("personId")%>"/>
-                        <input type="button" id="joinAuction" class="btn btn-danger" value="Join an Auction &raquo;"/>
-                    </form>
-                    </p>
-                </div>
-                <div class="span4">
-                    <h2>Select Winner</h2>
-                    <p>If you have already created an auction, you can select the winner among all the people who participated in it.</p>
-                    <p>
-                    <form id="closeAuction" action="closeShowAuctions.action">
-                        <input type="hidden" name="personId" value="<%= request.getAttribute("personId")%>"/>
-                        <input type="button" id="selectWinner" class="btn btn-success" value="Select the Winner &raquo;"/>
-                    </form>
-                    </p>
-                </div>
-            </div>
+		  
+		  <div class="row">
+			<div style="width:20%" class="span4" >
+			  <h2>Create Auction</h2>
+			  <p>If you have a book that you want to sell, here is the place for you. You can create an auction by filling the form.</p>
+			  <p>
+				<form id="createAuction" action="CreateAuction.jsp">
+					<input type="hidden" name="personId" value="<%= request.getAttribute("personId") %>"/>
+					<input type="button" id="createAuction" class="btn btn-warning" value="Create an Auction &raquo;"/>
+				</form>
+			  </p>
+			</div>
+			<div style="width:20%" class="span4">
+			  <h2>Join Auction</h2>
+			  <p>Need a book? Here you can search for a book or see all the available books. Then you can join the auction and bid for it</p>
+			  <p>
+				<form id="joinAuction" action="joinShowAuctions.action">
+				  <input type="hidden" name="personId" value="<%= request.getAttribute("personId") %>"/>
+				  <input type="button" id="joinAuction" class="btn btn-danger" value="Join an Auction &raquo;"/>
+				</form>
+			  </p>
+			</div>
+			<div style="width:20%" class="span4">
+			  <h2>Select Winner</h2>
+			  <p>If you have already created an auction, you can select the winner among all the people who participated in it.</p>
+			  <p>
+				<form id="closeAuction" action="closeShowAuctions.action">
+				  <input type="hidden" name="personId" value="<%= request.getAttribute("personId") %>"/>
+				  <input type="button" id="selectWinner" class="btn btn-success" value="Select the Winner &raquo;"/>
+				</form>
+			  </p>
+			</div>
+			<div style="width:20%" class="span4">
+			  <h2>Search Book</h2>
+			  <p>Need a book ??  If you want to find auctions quickly  ,you can use our quick searches ! please try it !! we provide 3 way to search!  </p>
+			  <p>
+				<form id="searchAuction" action="SearchAuction.jsp">
+					<input type="hidden" name="personId" value="<%= request.getAttribute("personId") %>"/>
+					<input type="button" id="searchAuction" class="btn btn-primary btn-Large" value="Search the book &raquo;"/>
+				</form>
+			  
+			  </p>
+			</div>
+			<div style="width:20%" class="span4">
+			  <h2>see profiles</h2>
+			  <p>If you want to know users , you can see profiles of each user ! please try it !! </p>
+			  <p>
+				<form id="searchAuction" action="ShowUserList.jsp">
+					<input type="hidden" name="personId" value="<%= request.getAttribute("personId") %>"/>
+					<input type="button" id="searchAuction" class="btn btn-primary btn-Large" value="Search the book &raquo;"/>
+				</form>
+			  
+			  </p>
+			</div>
+		  </div>
+		  <div    class="hero-unit" >
+		
+					recently auctions:
+			<table border=1 cellpadding=5>
+				<tr>
+				  
+				  <td>name of book </td>
+				  <td>name of seller</td>
+				   <td>name of writer </td>
+				  <td>publish year </td>
+				  <td>Quality </td>
+				  <td>end date</td>
+				  
+				  <td>minimom price</td>
+				  <td>maximom offer</td>
+				  <td> close/join </td>
+				</tr>
+				<c:forEach var="auc" items="${auctions}">
+				   <tr>
+					 
+					 <td><c:out value="${auc.book.name}"/></td>
+					 <td><c:out value="${auc.person.name}"/></td>
+					 
+					 <td><c:out value="${auc.book.writerName}"/></td>
+					 <td><c:out value="${auc.book.publishYear}"/></td>
+					 
+					 <td><c:out value="${auc.book.qualityStr}"/></td>
+					 <td><c:out value="${auc.endDate}"/></td>
+					 <td><c:out value="${auc.minPrice}"/></td>
+					 <td><c:out value="${auc.maxOfferPrice}"/></td>
+					 <c:choose>
+						<c:when test="${auc.person.id== personId}">
+							<form action="ShowOffers.action" method="POST">
+								<input type="hidden" name="auctionId" value="${auc.id}">
+								<input type="hidden" name="personId" value="${personId}">
+								<td><input type="submit" value="close"></td>
+							</form>
+						</c:when>
+						<c:otherwise>
+							<form action="JoinAuction.action"  method="POST">
+								<input type="hidden" name="auctionId" value="${auc.id}">
+								<input type="hidden" name="personId" value="${personId}">
+								<td>
+								<input type="text" name="price"/>
+								<input type="submit" value="join"></td>
+							</form>
+						</c:otherwise>
+					</c:choose>	 
+					 
+					</tr>
+				</c:forEach> 
+			
+			</table>
+		  
+		  </div>
+		  <hr>
 
-            <hr>
+		  <footer>
+			<p>By: Payam, Mehran, Leila, Aryaz</p>
+		  </footer>
 
-            <footer>
-                <p>By: Payam, Mehran, Leila, Aryaz</p>
-            </footer>
-
-        </div>
-    </body>
-</html>
+		</div>
+	  </body>
+	</html>

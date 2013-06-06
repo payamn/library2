@@ -1,5 +1,8 @@
 package controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,7 +13,7 @@ import exceptions.PersonNotFoundException;
 public class Login{
 
 
-	public String execute(HttpServletRequest req, HttpServletResponse response)  {
+	public String execute(HttpServletRequest req, HttpServletResponse response) throws ParseException  {
 	
 		
 		try{
@@ -23,7 +26,8 @@ public class Login{
 	
 		}
 		//writer.print("{personId:"+libContainer.getLib().getIdByMail(req.getParameter("email"),req.getParameter("password"))+"}"     );
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		req.setAttribute("auctions", Library.getRecentlyAddedAuctions(sdf.parse("01-01-2013")));
 		return "Bookstore.jsp";
 		
 		
