@@ -13,7 +13,6 @@ import domain.model.Auction;
 import domain.model.Book;
 import domain.model.Offer;
 import domain.model.Person;
-import domain.model.Profile;
 
 public class DBConnector {
 
@@ -135,17 +134,10 @@ public class DBConnector {
 		return result;
 	}
 	public static Person getPersonByMail(String mail) throws PersonNotFoundException {
-		Query query = session.createQuery("From Profile");
+		Query query = session.createQuery("From Person where mail = :m;");
+		query.setParameter("m", mail);
 		@SuppressWarnings("unchecked")
-		List<Profile> resultList = query.list();
-		List<Person> result = new ArrayList<Person>();
-		for(Profile p : resultList) {
-			if(p.getMail().equals(mail)) {
-				System.out.println("profile : "+p);
-				System.out.println("person : "+p.getPerson());
-				result.add(p.getPerson());
-			}
-		}
+		List<Person> result = query.list();
 		if(result.size() == 0) {
 			System.out.println("Exception khak bar saremoon .");
 			throw new PersonNotFoundException("Person not found in getPersonByMail method in DBConnector .");

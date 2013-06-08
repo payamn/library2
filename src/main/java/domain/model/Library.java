@@ -33,6 +33,7 @@ public class Library {
 			quality=Quality.AWFUL;
 		else if (qualityStr.equalsIgnoreCase("NORMAL"))
 			quality=Quality.NORMAL;
+		
 		Book book = new Book(bookName, bookWriter, publishYear, quality);
 		Person person = DBConnector.getPerson(sellerId);
 		Auction auction = new Auction(book, startDate, endDate, price);
@@ -47,7 +48,7 @@ public class Library {
 		Person person = DBConnector.getPerson(personId);
 		auction.checkValidPrice(price);
 		Offer offer = new Offer(price, new Date());
-		offer.setAuction(auction);
+		//offer.setAuction(auction);
 		offer.setPerson(person);
 		DBConnector.saveOffer(offer);
 	}
@@ -62,7 +63,6 @@ public class Library {
 		DBConnector.saveAuction(auction);
 		DBConnector.savePerson(seller);
 		DBConnector.savePerson(person);
-
 	}
 	public static void finishExpiredAuction(int auctionId) throws AuctionNotFoundException {
 		Auction auction = DBConnector.getAuction(auctionId);
@@ -87,23 +87,17 @@ public class Library {
 	public static  List<Auction> getActiveAuctionByOwner(int sellerId) throws PersonNotFoundException {
 		System.out.println("Hello I am getActiveAuctionByOwner in Library .");
 		System.out.println("getActiveAuctionByOwner in Library : "+sellerId);
-
-		return ( DBConnector.findAuctionByOwner(sellerId));
+		return (DBConnector.findAuctionByOwner(sellerId));
 
 	}
 	public static List<Auction>  searchAllAvailableAuctionsOfPerson(int personId) throws PersonNotFoundException {
-
-
-
 		return (DBConnector.findAuctionByForPerson(personId));
-
 	}
 	public static int getIdByMail(String mail) throws PersonNotFoundException {
 		return DBConnector.getPersonByMail(mail).getId();
 	}
 	public static List<Auction> getRecentlyAddedAuctions(Date date) {
 		return DBConnector.findRecentlyAddedAuctions(date);
-
 	}
 	public static List<Person> getProfiles() {
 		return null;

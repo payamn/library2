@@ -22,8 +22,6 @@ import domain.exceptions.closeTimeException;
 import domain.exceptions.priceException;
 import domain.mail.MailSender;
 
-
-
 @Entity
 @Table
 public class Auction {
@@ -32,28 +30,20 @@ public class Auction {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(unique = true, nullable = false)
 	private int id;
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "auction", cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, mappedBy="auction", cascade=CascadeType.ALL)
 	private Book book;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "person_id", nullable = false)
 	private Person person;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "auction")
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="auction_id")
 	private Set<Offer> offers;
 	private int minPrice;
 	private Date startDate;
 	private Date endDate;
 	private boolean isFinished;
-	public int getMaxOfferPrice() {
-		int max=-1;
-		for (Offer of : offers){
-			if (of.getPrice()>max)
-				max=of.getPrice();	
-		}
-		if (max==-1)
-			return 0;
-		return max;
-	}
+	
 	public Auction() {
+		this.offers = new HashSet<Offer>();
 	}
 	public Auction(Book book, Date startDate, Date endDate, int price) {
 		this.book = book;
@@ -70,9 +60,15 @@ public class Auction {
 		this.offers = offers;
 		this.isFinished = false;
 	}
-	@Override
-	public String toString() {
-		return id+" "+book+" "+startDate+" "+endDate;
+	public int getMaxOfferPrice() {
+		int max=-1;
+		for (Offer of : offers){
+			if (of.getPrice()>max)
+				max=of.getPrice();	
+		}
+		if (max==-1)
+			return 0;
+		return max;
 	}
 	public void setPerson(Person person) {
 		this.person = person;
@@ -108,7 +104,6 @@ public class Auction {
 	}
 	public Book getBook(){
 		return book;
-	
 	}
 	public String getEndDate(){
 		
@@ -116,8 +111,7 @@ public class Auction {
 	}
 	public void checkValidTime() throws closeTimeException {
 		if (isFinished())
-			throw new closeTimeException("Auction has been expired before.");
-		
+			throw new closeTimeException("Auction has been expired before.");	
 	}
 	public int getMinPrice() {
 		return minPrice;
@@ -127,8 +121,7 @@ public class Auction {
 	}
 	public void checkValidPrice(int price) throws priceException {
 		if (price<minPrice)
-			throw new priceException("your price is less than minimum");
-		
+			throw new priceException("your price is less than minimum");	
 	}
 	public int getId() {
 		return id;
@@ -140,9 +133,10 @@ public class Auction {
 		return startDate;
 	}
 	public Set<Offer> getOffers(){
-		return offers;
-		
+		return offers;	
 	}
-	
-	
+	@Override
+	public String toString() {
+		return id+" "+book+" "+startDate+" "+endDate;
+	}
 }

@@ -1,28 +1,26 @@
 package domain.model;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table
 public class Book {
 
-	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "auction"))
+//	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "auction"))
 	@Id
-	@GeneratedValue(generator = "generator")
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name="id", unique = true, nullable = false)
 	private int id;
 	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
+	//@PrimaryKeyJoinColumn
 	private Auction auction;
 	private String name;
 	private String writerName;
@@ -30,17 +28,14 @@ public class Book {
 	private Quality quality;
 	public Book() {
 	}
-	public void setAuction(Auction auction) {
-		this.auction = auction;
-	}
-	public String toString() {
-		return id+" "+name+" "+writerName+" "+publishYear+" "+quality;	
-	}
 	public Book(String name, String writerName, int publishYear, Quality quality) {
 		this.name = name;
 		this.writerName = writerName;
 		this.publishYear = publishYear;
 		this.quality = quality;
+	}
+	public void setAuction(Auction auction) {
+		this.auction = auction;
 	}
 	public String getName() {
 		return this.name;
@@ -68,5 +63,8 @@ public class Book {
 	}
 	public Auction getAuction() {
 		return auction;
+	}
+	public String toString() {
+		return id+" "+name+" "+writerName+" "+publishYear+" "+quality;	
 	}
 }

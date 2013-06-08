@@ -24,9 +24,9 @@ public class App {
 
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		
-		Profile pr1 = new Profile("Kamran", "Kamrani", new Date(), "payam222@gmail.com", "123456");
-		Profile pr2 = new Profile("Shaskool", "Kheng zade", new Date(), "pakdel@gmail.com", "123456");
-		Profile pr3 = new Profile("Ariaz", "Eghbali", new Date(), "aryaz@gmail.com", "123456");
+		Profile pr1 = new Profile("Kamran", "Kamrani", new Date());
+		Profile pr2 = new Profile("Shaskool", "Kheng zade", new Date());
+		Profile pr3 = new Profile("Ariaz", "Eghbali", new Date());
 		
 		HashSet<Auction> hs1 = new HashSet<Auction>();
 		HashSet<Auction> hs2 = new HashSet<Auction>();
@@ -45,7 +45,7 @@ public class App {
 		offers2.add(offer2);
 		
 		Auction auction1 = new Auction(book1,new Date(), new Date(), offers1);
-		Auction auction2 = new Auction(book1,new Date(), new Date(), offers2);
+		Auction auction2 = new Auction(book2,new Date(), new Date(), offers2);
 		
 		book1.setAuction(auction1);
 		book2.setAuction(auction2);
@@ -53,9 +53,9 @@ public class App {
 		hs1.add(auction1);
 		hs2.add(auction2);
 		
-		Person person1 = new Person(pr1, hs1);
-		Person person2 = new Person(pr2, hs2);
-		Person person3 = new Person(pr3, hs3);
+		Person person1 = new Person(pr1, "payam222@gmail.com", "123456", hs1, offers2);
+		Person person2 = new Person(pr2, "pakdel@gmail.com", "123456", hs2, offers1);
+		Person person3 = new Person(pr3, "aryaz@gmail.com", "123456", hs3, new HashSet<Offer>());
 		
 		pr1.setPerson(person1);
 		pr2.setPerson(person2);
@@ -65,23 +65,23 @@ public class App {
 		auction2.setPerson(person2);
 		
 		offer1.setPerson(person2);
-		offer1.setAuction(auction1);
+		//offer1.setAuction(auction1);
 		
 		offer2.setPerson(person1);
-		offer2.setAuction(auction2);
+		//offer2.setAuction(auction2);
 		
 		session.beginTransaction();
 		
 		session.save(person1);
-		session.save(person2);
-		session.save(person3);
+		//session.save(person2);
+		//session.save(person3);
 		
-		session.save(auction1);
-		session.save(auction2);
-		
+		//session.save(auction1);
+		//session.save(auction2);
+		/*
 		session.save(offer1);
 		session.save(offer2);
-		
+		*/
 		session.getTransaction().commit();
 		
 		Person pp = (Person) session.get(Person.class, 1);

@@ -2,6 +2,7 @@ package domain.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,7 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table
 public class Person {
@@ -23,19 +23,28 @@ public class Person {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(unique = true, nullable = false)
 	private int id;
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.ALL)
+	// TODO : is optional=false good ?
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "person", cascade=CascadeType.ALL, optional=false)
 	private Profile profile;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade=CascadeType.ALL)
 	private Set<Auction> auctions;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade=CascadeType.ALL)
+	private Set<Offer> offers;
+	@Column(unique = true, nullable=false)
+	private String mail;
+	@Column(nullable=false)
+	private String password;
 	
 	public Person() {
+		auctions = new HashSet<Auction>();
+		offers = new HashSet<Offer>();
 	}
-	public String toString() {
-		return id+" "+profile;
-	}
-	public Person(Profile profile, Set<Auction> auctions) {
+	public Person(Profile profile, String mail, String password, Set<Auction> auctions, Set<Offer> offers) {
+		this.mail = mail;
+		this.password = password;
 		this.profile = profile;
-		this.setAuctions(auctions);
+		this.auctions = auctions;
+		this.offers = offers;
 	}
 	public int getId() {
 		return this.id;
@@ -45,9 +54,6 @@ public class Person {
 	}
 	public void deacreaseRate() {
 		this.profile.decreaseRate();
-	}
-	public String getMail() {
-		return this.profile.getMail();
 	}
 	public Profile getProfile() {
 		System.out.println("in getprofile");
@@ -62,5 +68,26 @@ public class Person {
 	}
 	public void setAuctions(Set<Auction> auctions) {
 		this.auctions = auctions;
+	}
+	public String getMail() {
+		return mail;
+	}
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public Set<Offer> getOffers() {
+		return offers;
+	}
+	public void setOffers(Set<Offer> offers) {
+		this.offers = offers;
+	}
+	public String toString() {
+		return id+" "+profile;
 	}
 }
