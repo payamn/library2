@@ -54,11 +54,11 @@ public class JobScheduler {
 		try {
 			// specify the job' s details..
 			JobDetail job = JobBuilder.newJob(ExecuteJobWarning.class)
-					.withIdentity("lib")
+					.withIdentity("warn")
 					.build();
 			// specify the running period of the job
 			Trigger trigger = TriggerBuilder.newTrigger()
-					.withIdentity("trigger1", "group1")
+					.withIdentity("trigger2", "group2")
 					.startAt(endDate)
 					.build();
 			//schedule the job
