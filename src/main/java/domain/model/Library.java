@@ -41,7 +41,10 @@ public class Library {
 		auction.setPerson(person);
 
 		DBConnector.saveAuction(auction);	
-		JobScheduler.createNewJob(endDate,auction.getId(),bookName,person.getName());
+		Date warnDate=new Date();
+		warnDate.setTime(endDate.getTime()-172800000);
+		JobScheduler.createNewJobEnd(endDate,auction.getId(),bookName,person.getName());
+		JobScheduler.createNewJobWarning(warnDate,auction.getId(),bookName,person.getName(), person.getMail());
 	}
 	public static void joinToAuction(int personId,int auctionId,int price) 
 			throws AuctionNotFoundException, PersonNotFoundException, closeTimeException, priceException {
