@@ -53,7 +53,10 @@ public class Book {
 		else
 			return "normal";
 	}
+	@Override
 	public String toString() {
-		return id+" "+name+" "+writerName+" "+publishYear+" "+quality;	
+		return "Book [id=" + id + ", name=" + name + ", writerName="
+				+ writerName + ", publishYear=" + publishYear + ", quality="
+				+ quality + "]";
 	}
 }

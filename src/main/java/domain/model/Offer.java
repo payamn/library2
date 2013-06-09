@@ -41,7 +41,9 @@ public class Offer {
 	public int getPrice() {
 		return price;
 	}
+	@Override
 	public String toString() {
-		return id+" "+price+" "+offerDate;
+		return "Offer [id=" + id + ", person=" + person + ", price=" + price
+				+ ", offerDate=" + offerDate + "]";
 	}
 }

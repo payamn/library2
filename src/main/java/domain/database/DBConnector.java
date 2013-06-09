@@ -10,7 +10,6 @@ import domain.exceptions.AuctionNotFoundException;
 import domain.exceptions.BookIsExist;
 import domain.exceptions.PersonNotFoundException;
 import domain.model.Auction;
-import domain.model.Offer;
 import domain.model.Person;
 
 public class DBConnector {
@@ -20,7 +19,6 @@ public class DBConnector {
 	public static Auction getAuction(int auctionID) throws AuctionNotFoundException {
 		session = HibernateUtil.getSessionFactory().openSession();
 		Auction auction = (Auction) session.get(Auction.class, auctionID);
-		System.out.print("auctionID:"+auctionID);
 		
 		if(auction == null)
 			throw new AuctionNotFoundException("Auction not found in getAuction method in DBConnector .");
@@ -32,11 +30,11 @@ public class DBConnector {
 			throw new PersonNotFoundException("Person not found in getPerson method in DBConnector .");
 		return person;
 	}
-	public static void saveOffer(Offer offer) {
+	/*public static void saveOffer(Offer offer) {
 		session.beginTransaction();
 		session.save(offer);
 		session.getTransaction().commit();
-	}
+	}*/
 	public static void saveAuction(Auction auction) {
 		session.beginTransaction();
 		session.save(auction);
@@ -55,7 +53,7 @@ public class DBConnector {
 	
 	public static List<Auction> findAuctionByBookName(String bookName, int personId) {
 
-		Query query = session.createQuery("select aa from auction as aa inner join aa.book bb with" +
+		Query query = session.createQuery("select aa from Auction as aa inner join aa.book bb where" +
 				" bb.name= :myname and aa.person.id<> :myID");	
 		query.setParameter("myname", bookName);
 		query.setParameter("myID", personId);
@@ -66,7 +64,7 @@ public class DBConnector {
 	}
 	public static List<Auction> findAuctionByWriterName(String bookWriter, int personId) {
 
-		Query query = session.createQuery("select aa from auction as aa inner join aa.book bb with" +
+		Query query = session.createQuery("select aa from Auction as aa inner join aa.book bb where" +
 				" bb.writerName= :myname and aa.person.id<> :myID");	
 		query.setParameter("myname", bookWriter);
 		query.setParameter("myID", personId);
@@ -77,7 +75,7 @@ public class DBConnector {
 	}
 	public static List<Auction> findAuctionByOwnerName(String sellerFirstName, String sellerLastName, int personId) {
 		
-		Query query = session.createQuery("select aa from auction as aa inner join aa.book bb with" +
+		Query query = session.createQuery("select aa from Auction as aa inner join aa.book bb where" +
 				" aa.person.profile.firstName= :myname1 and aa.person.profile.lastName= :myname2 and aa.person.id<> :myID");	
 		query.setParameter("myname1", sellerFirstName);
 		query.setParameter("myname2", sellerLastName);
@@ -89,7 +87,7 @@ public class DBConnector {
 	}
 	public static List<Auction> findAuctionByOwnerID(int personId) {
 		System.out.println("Hello I am findAuctionByOwner in DBConnector .");
-		Query query = session.createQuery("select from auction as aa with" +
+		Query query = session.createQuery("select from Auction as aa where" +
 				" aa.id= :myID");	
 		query.setParameter("myID", personId);
 
@@ -99,7 +97,7 @@ public class DBConnector {
 	}
 	public static List<Auction> findAuctionForPerson(int personId) {
 
-		Query query = session.createQuery("select from auction as aa with" +
+		Query query = session.createQuery("select from Auction as aa where" +
 				" aa.id<> :myID");	
 		query.setParameter("myID", personId);
 
@@ -109,7 +107,7 @@ public class DBConnector {
 	}
 	public static List<Auction> findRecentlyAddedAuctions(Date now) {
 		Date past = new Date(now.getTime()-864000000);
-		Query query = session.createQuery("select from auction as aa with" +
+		Query query = session.createQuery("select from Auction as aa where" +
 				" aa.startDate> :past and aa.endDate< :now ");	
 		query.setParameter("now", now);
 		query.setParameter("past", past);
@@ -131,7 +129,7 @@ public class DBConnector {
 		return result.get(0);
 	}
 	public static boolean personWithIdHasBook(int sellerId, String bookName, String bookWriter, int publishYear) throws BookIsExist {
-		Query query = session.createQuery("select aa from auction as aa inner join aa.book bb with" +
+		Query query = session.createQuery("select aa from Auction as aa inner join aa.book bb where" +
 				" bb.name= :myname and bb.writerName= :mywritername and bb.publishYear= :myyear and aa.person.id= :myID");	
 		query.setParameter("myname", bookName);
 		query.setParameter("mywritername", bookWriter);

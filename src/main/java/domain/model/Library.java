@@ -1,6 +1,7 @@
 package domain.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import domain.scheduler.*;
@@ -15,7 +16,7 @@ public class Library {
 	public static Auction getAuctionById(int auctionId) throws AuctionNotFoundException {
 		return DBConnector.getAuction(auctionId);  
 	}
-	public static void  createAuction(int sellerId,String bookName,String bookWriter
+	public static void createAuction(int sellerId,String bookName,String bookWriter
 			,int publishYear,String qualityStr,Date startDate,Date endDate,int price)
 					throws BookIsExist, PersonNotFoundException {
 
@@ -37,7 +38,7 @@ public class Library {
 
 		Book book = new Book(bookName, bookWriter, publishYear, quality);
 		Person person = DBConnector.getPerson(sellerId);
-		Auction auction = new Auction(book, startDate, endDate, price);
+		Auction auction = new Auction(book, startDate, endDate, price, new HashSet<Offer>());
 		auction.setPerson(person);
 
 		DBConnector.saveAuction(auction);	

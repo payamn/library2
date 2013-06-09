@@ -83,7 +83,9 @@ public class Person {
 	public void addOffer(Offer offer) {
 		offers.add(offer);
 	}
+	@Override
 	public String toString() {
-		return id+" "+profile;
+		return "Person [id=" + id + ", profile=" + profile + ", offers size="
+				+ offers.size() + ", mail=" + mail + ", password=" + password + "]";
 	}
 }

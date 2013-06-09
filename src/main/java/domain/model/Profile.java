@@ -51,7 +51,9 @@ public class Profile {
 	public String getName(){
 		return firstName+lastName;
 	}
+	@Override
 	public String toString() {
-		return id+" "+firstName+" "+lastName+" "+rate+" "+joinDate;
+		return "Profile [id=" + id + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", rate=" + rate + ", joinDate=" + joinDate + "]";
 	}
 }

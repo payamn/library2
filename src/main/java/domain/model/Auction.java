@@ -45,20 +45,21 @@ public class Auction {
 	public Auction() {
 		this.offers = new HashSet<Offer>();
 	}
-	public Auction(Book book, Date startDate, Date endDate, int price) {
+	/*public Auction(Book book, Date startDate, Date endDate, int minPrice) {
 		this.book = book;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.offers = new HashSet<Offer>();
 		this.isFinished = false;
-		this.minPrice = price;
-	}
-	public Auction(Book book, Date startDate, Date endDate, Set<Offer> offers) {
+		this.minPrice = minPrice;
+	}*/
+	public Auction(Book book, Date startDate, Date endDate, int minPrice, Set<Offer> offers) {
 		this.book = book;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.offers = offers;
 		this.isFinished = false;
+		this.minPrice = minPrice;
 	}
 	public int getMaxOfferPrice() {
 		int max=-1;
@@ -137,6 +138,12 @@ public class Auction {
 	}
 	@Override
 	public String toString() {
-		return id+" "+book+" "+startDate+" "+endDate;
+		return "Auction [id=" + id + ", book=" + book + ", person=" + person
+				+ ", offers size=" + offers.size() + ", minPrice=" + minPrice
+				+ ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", isFinished=" + isFinished + "]";
+	}
+	public void addOffer(Offer offer) {
+		offers.add(offer);	
 	}
 }
