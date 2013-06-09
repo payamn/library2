@@ -30,7 +30,7 @@ public class Auction {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(unique = true, nullable = false)
 	private int id;
-	@OneToOne(fetch = FetchType.LAZY, mappedBy="auction", cascade=CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	private Book book;
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Person person;

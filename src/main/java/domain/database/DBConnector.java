@@ -1,6 +1,5 @@
 package domain.database;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,9 +7,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import domain.exceptions.AuctionNotFoundException;
+import domain.exceptions.BookIsExist;
 import domain.exceptions.PersonNotFoundException;
 import domain.model.Auction;
-import domain.model.Book;
 import domain.model.Offer;
 import domain.model.Person;
 
@@ -48,106 +47,103 @@ public class DBConnector {
 		session.save(person);
 		session.getTransaction().commit();
 	}
-	
-	
-	public static List<Book> getBooks(String name, String writer, int year) {
-		Query query = session.createQuery("From Book where name= :myname and writerName= :mywriter and publishYear= :myyear");	
-		query.setParameter("myname", name);
-		query.setParameter("mywriter", writer);
-		query.setParameter("myyear", year);
-		System.out.println(name+" "+writer+" "+year);
-		
-		@SuppressWarnings("unchecked")
-		List<Book> resultList = query.list();
-		return resultList;
+	public static void updatePerson(Person person) {
+		session.beginTransaction();
+		session.update(person);
+		session.getTransaction().commit();
 	}
+	
 	public static List<Auction> findAuctionByBookName(String bookName, int personId) {
 
-		Query query = session.createQuery("From Book where name= :myname");	
+		Query query = session.createQuery("select aa from auction as aa inner join aa.book bb with" +
+				" bb.name= :myname and aa.person.id<> :myID");	
 		query.setParameter("myname", bookName);
+		query.setParameter("myID", personId);
 
 		@SuppressWarnings("unchecked")
-		List<Book> resultList = query.list();
-		List<Auction> result = new ArrayList<Auction>();
-		for(Book b : resultList) {
-			if(b.getAuction().getPerson().getId() != personId && !b.getAuction().isFinished()) {
-				result.add(b.getAuction());
-			}
-		}
+		List<Auction> result = query.list();
 		return result;
 	}
 	public static List<Auction> findAuctionByWriterName(String bookWriter, int personId) {
-		Query query = session.createQuery("From Book where writerName= :myname");	
+
+		Query query = session.createQuery("select aa from auction as aa inner join aa.book bb with" +
+				" bb.writerName= :myname and aa.person.id<> :myID");	
 		query.setParameter("myname", bookWriter);
+		query.setParameter("myID", personId);
 
 		@SuppressWarnings("unchecked")
-		List<Book> resultList = query.list();
-		List<Auction> result = new ArrayList<Auction>();
-		for(Book b : resultList) {
-			if(b.getAuction().getPerson().getId() != personId && !b.getAuction().isFinished()) {
-				result.add(b.getAuction());
-			}
-		}
+		List<Auction> result = query.list();
 		return result;
 	}
-	public static List<Auction> findAuctionByBookName(String sellerFirstName, String sellerLastName, int personId) {
-		//salam mehrankharef
-		Query query = session.createQuery("From Auction");
+	public static List<Auction> findAuctionByOwnerName(String sellerFirstName, String sellerLastName, int personId) {
+		
+		Query query = session.createQuery("select aa from auction as aa inner join aa.book bb with" +
+				" aa.person.profile.firstName= :myname1 and aa.person.profile.lastName= :myname2 and aa.person.id<> :myID");	
+		query.setParameter("myname1", sellerFirstName);
+		query.setParameter("myname2", sellerLastName);
+		query.setParameter("myID", personId);
+
 		@SuppressWarnings("unchecked")
-		List<Auction> resultList = query.list();
-		List<Auction> result = new ArrayList<Auction>();
-		for(Auction a : resultList) {
-			if(a.getPerson().getProfile().getFirstName().equals(sellerFirstName) &&
-					a.getPerson().getProfile().getLastName().equals(sellerLastName) && 
-					a.getPerson().getId() != personId && !a.isFinished()) {
-				result.add(a);
-			}
-		}
+		List<Auction> result = query.list();
 		return result;
 	}
-	public static List<Auction> findAuctionByOwner(int personId) {
+	public static List<Auction> findAuctionByOwnerID(int personId) {
 		System.out.println("Hello I am findAuctionByOwner in DBConnector .");
-		Query query = session.createQuery("From Auction");
+		Query query = session.createQuery("select from auction as aa with" +
+				" aa.id= :myID");	
+		query.setParameter("myID", personId);
+
 		@SuppressWarnings("unchecked")
-		List<Auction> resultList = query.list();
-		List<Auction> result = new ArrayList<Auction>();
-		for(Auction a : resultList) {
-			if(a.getPerson().getId() == personId && !a.isFinished()) {
-				System.out.println("finded person in  findAuctionByOwner in DBConnector : "+a.getPerson());
-				result.add(a);
-			}
-		}
+		List<Auction> result = query.list();
 		return result;
 	}
-	public static List<Auction> findAuctionByForPerson(int personId) {
-		//leila
-		session = HibernateUtil.getSessionFactory().openSession();
-		Query query = session.createQuery("From Auction");
+	public static List<Auction> findAuctionForPerson(int personId) {
+
+		Query query = session.createQuery("select from auction as aa with" +
+				" aa.id<> :myID");	
+		query.setParameter("myID", personId);
+
 		@SuppressWarnings("unchecked")
-		List<Auction> resultList = query.list();
-		List<Auction> result = new ArrayList<Auction>();
-		for(Auction a : resultList) {
-			if(a.getPerson().getId() != personId && !a.isFinished() && a.getId()!=0) {
-				result.add(a);
-			}
-		}
+		List<Auction> result = query.list();
+		return result;
+	}
+	public static List<Auction> findRecentlyAddedAuctions(Date now) {
+		Date past = new Date(now.getTime()-864000000);
+		Query query = session.createQuery("select from auction as aa with" +
+				" aa.startDate> :past and aa.endDate< :now ");	
+		query.setParameter("now", now);
+		query.setParameter("past", past);
+
+		@SuppressWarnings("unchecked")
+		List<Auction> result = query.list();
 		return result;
 	}
 	public static Person getPersonByMail(String mail) throws PersonNotFoundException {
-		Query query = session.createQuery("From Person where mail = :m;");
+		Query query = session.createQuery("from person as p where p.mail = :m");
 		query.setParameter("m", mail);
 		@SuppressWarnings("unchecked")
 		List<Person> result = query.list();
 		if(result.size() == 0) {
-			System.out.println("Exception khak bar saremoon .");
 			throw new PersonNotFoundException("Person not found in getPersonByMail method in DBConnector .");
 		}
 		if(result.size() > 1)
 			System.out.println("Inconsistency in DB . ");
 		return result.get(0);
 	}
-	public static List<Auction> findRecentlyAddedAuctions(Date date) {
-		// TODO by mehran
-		return null;
+	public static boolean personWithIdHasBook(int sellerId, String bookName, String bookWriter, int publishYear) throws BookIsExist {
+		Query query = session.createQuery("select aa from auction as aa inner join aa.book bb with" +
+				" bb.name= :myname and bb.writerName= :mywritername and bb.publishYear= :myyear and aa.person.id= :myID");	
+		query.setParameter("myname", bookName);
+		query.setParameter("mywritername", bookWriter);
+		query.setParameter("myyear", publishYear);
+		query.setParameter("myID", sellerId);
+
+		@SuppressWarnings("unchecked")
+		List<Auction> result = query.list();
+		if(result.size()>1)
+			throw new BookIsExist("more than 1 book found , inconsistency in DB .");
+		if(result.size()==1)
+			return true;
+		return false;
 	}
 }

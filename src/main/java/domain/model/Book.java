@@ -4,10 +4,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,9 +17,6 @@ public class Book {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name="id", unique = true, nullable = false)
 	private int id;
-	@OneToOne(fetch = FetchType.LAZY)
-	//@PrimaryKeyJoinColumn
-	private Auction auction;
 	private String name;
 	private String writerName;
 	private int publishYear;
@@ -33,9 +28,6 @@ public class Book {
 		this.writerName = writerName;
 		this.publishYear = publishYear;
 		this.quality = quality;
-	}
-	public void setAuction(Auction auction) {
-		this.auction = auction;
 	}
 	public String getName() {
 		return this.name;
@@ -60,9 +52,6 @@ public class Book {
 			return "awful";
 		else
 			return "normal";
-	}
-	public Auction getAuction() {
-		return auction;
 	}
 	public String toString() {
 		return id+" "+name+" "+writerName+" "+publishYear+" "+quality;	

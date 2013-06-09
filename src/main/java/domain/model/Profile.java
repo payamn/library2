@@ -6,10 +6,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,9 +19,10 @@ public class Profile {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(unique = true, nullable = false)
 	private int id;
-	@OneToOne(fetch = FetchType.LAZY)
+	/*@OneToOne(fetch = FetchType.LAZY)
 	//@PrimaryKeyJoinColumn
 	private Person person;
+	*/
 	private String firstName;
 	private String lastName;
 	private int rate;
@@ -37,9 +36,6 @@ public class Profile {
 		this.lastName = lastName;
 		this.joinDate = joinDate;
 	}
-	public void setPerson(Person person) {
-		this.person = person;
-	}
 	public void increaseRate() {
 		rate ++;
 	}
@@ -51,9 +47,6 @@ public class Profile {
 	}
 	public String getLastName() {
 		return lastName;
-	}
-	public Person getPerson() {
-		return person;
 	}
 	public String getName(){
 		return firstName+lastName;

@@ -24,11 +24,12 @@ public class Person {
 	@Column(unique = true, nullable = false)
 	private int id;
 	// TODO : is optional=false good ?
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "person", cascade=CascadeType.ALL, optional=false)
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, optional=false)
 	private Profile profile;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade=CascadeType.ALL)
+	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade=CascadeType.ALL)
 	private Set<Auction> auctions;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade=CascadeType.ALL)
+	*/
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="person", cascade=CascadeType.ALL)
 	private Set<Offer> offers;
 	@Column(unique = true, nullable=false)
 	private String mail;
@@ -36,14 +37,12 @@ public class Person {
 	private String password;
 	
 	public Person() {
-		auctions = new HashSet<Auction>();
 		offers = new HashSet<Offer>();
 	}
-	public Person(Profile profile, String mail, String password, Set<Auction> auctions, Set<Offer> offers) {
+	public Person(Profile profile, String mail, String password, Set<Offer> offers) {
 		this.mail = mail;
 		this.password = password;
 		this.profile = profile;
-		this.auctions = auctions;
 		this.offers = offers;
 	}
 	public int getId() {
@@ -63,12 +62,6 @@ public class Person {
 	public String getName(){
 		return profile.getFirstName()+" "+profile.getLastName();
 	}
-	public Set<Auction> getAuctions() {
-		return auctions;
-	}
-	public void setAuctions(Set<Auction> auctions) {
-		this.auctions = auctions;
-	}
 	public String getMail() {
 		return mail;
 	}
@@ -86,6 +79,9 @@ public class Person {
 	}
 	public void setOffers(Set<Offer> offers) {
 		this.offers = offers;
+	}
+	public void addOffer(Offer offer) {
+		offers.add(offer);
 	}
 	public String toString() {
 		return id+" "+profile;
