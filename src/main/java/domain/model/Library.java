@@ -3,6 +3,7 @@ package domain.model;
 import java.util.Date;
 import java.util.List;
 
+import domain.scheduler.*;
 import domain.database.DBConnector;
 import domain.exceptions.AuctionNotFoundException;
 import domain.exceptions.BookIsExist;
@@ -40,7 +41,7 @@ public class Library {
 		auction.setPerson(person);
 		book.setAuction(auction);
 		DBConnector.saveAuction(auction);	
-		//	JobScheduler.createNewJob(OV.getAuctionEndDate(), auction.getId());
+		JobScheduler.createNewJob(endDate,auction.getId(),bookName,person.getName());
 	}
 	public static void joinToAuction(int personId,int auctionId,int price) throws AuctionNotFoundException, PersonNotFoundException, closeTimeException, priceException {
 		Auction auction = DBConnector.getAuction(auctionId);

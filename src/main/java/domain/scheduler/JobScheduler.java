@@ -18,8 +18,7 @@ import org.quartz.impl.StdSchedulerFactory;
  *
  */
 public class JobScheduler {
-	
-	public static void createNewJob(Date endDate, int auctionId,String bookName,String name ,String family) {
+	public static void createNewJob(Date endDate, int auctionId,String bookName,String name) {
 		System.out.println("in CreateNewJob");
 		System.out.println(endDate.toString());
 		System.out.println("auctionID:   "+auctionId);
@@ -39,7 +38,6 @@ public class JobScheduler {
 			job.getJobDataMap().put("auctionId", auctionId);
 			job.getJobDataMap().put("bookName", bookName);
 			job.getJobDataMap().put("personName", name);
-			job.getJobDataMap().put("familyName", family);
 			sch.start();
 			sch.scheduleJob(job, trigger);
 		} catch (SchedulerException e) {
