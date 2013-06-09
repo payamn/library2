@@ -43,17 +43,22 @@ public class App {
 		Offer offer3 = new Offer(300, new Date());
 		Offer offer4 = new Offer(400, new Date());
 		
-		offersPerson1.add(offer1);
-		offers2.add(offer2);
-		offers3.add(offer3);
-		offers3.add(offer4);
+		offersAuction1.add(offer1);
+		offersAuction1.add(offer3);
+		offersAuction2.add(offer2);
+		offersAuction2.add(offer4);
 		
-		Auction auction1 = new Auction(book1,new Date(), new Date(), offers1);
-		Auction auction2 = new Auction(book2,new Date(), new Date(), offers2);
+		offersPerson1.add(offer2);
+		offersPerson2.add(offer1);
+		offersPerson3.add(offer3);
+		offersPerson3.add(offer4);
 		
-		Person person1 = new Person(pr1, "payam222@gmail.com", "123456", offers2);
-		Person person2 = new Person(pr2, "pakdel@gmail.com", "123456", offers1);
-		Person person3 = new Person(pr3, "aryaz@gmail.com", "123456", offers3);
+		Auction auction1 = new Auction(book1,new Date(), new Date(), offersAuction1);
+		Auction auction2 = new Auction(book2,new Date(), new Date(), offersAuction2);
+		
+		Person person1 = new Person(pr1, "payam222@gmail.com", "123456", offersPerson1);
+		Person person2 = new Person(pr2, "pakdel@gmail.com", "123456", offersPerson2);
+		Person person3 = new Person(pr3, "aryaz@gmail.com", "123456", offersPerson3);
 		
 		auction1.setPerson(person1);
 		auction2.setPerson(person2);
@@ -74,9 +79,10 @@ public class App {
 		
 		session.getTransaction().commit();
 		
-		/*
+		// Tests
+		
 		Person pp = (Person) session.get(Person.class, 1);
 		System.out.println("Person get test : "+pp);
-		*/
+		
 	}
 }
