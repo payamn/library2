@@ -54,9 +54,9 @@ public class MailSender {
 		// after finishing auction , for people who is auction's winner
 		SendMail(person.getMail(), "Hi "+name+"\n"+"the auction that you joined is finished and you are the winner.\n"+"You can communicate with : "+Mail, "finished auction");
 	}
-	public static void sendAuctionWarningMailToOwner(Person person,String name) {
+	public static void sendAuctionWarningMailToOwner(String mail,String bookName,String name) {
 		// after finishing auction , for people who is auction's owner
-		SendMail(person.getMail(), "the auction that you had made will be finished on the day after tomorrow ,please come and choose the winner. \nThank you.", "finished auction");
+		SendMail(mail, "the auction that you made will be finished on the day after tomorrow ,please come and choose the winner.\n book: "+bookName+ "\nThank you.", "finished auction");
 	}
 	public static void sendAuctionSuccessMailToOwner(Person person,String name) {
 		// after finishing auction , for people who is auction's owner

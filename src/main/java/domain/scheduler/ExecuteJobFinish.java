@@ -6,7 +6,7 @@ import org.quartz.JobExecutionException;
 
 import domain.model.Library;
 
-public class executeJob implements Job{
+public class ExecuteJobFinish implements Job{
 
 	public void execute(JobExecutionContext exeInfo) throws JobExecutionException {
 		System.out.println("IN execute job");
