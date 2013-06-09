@@ -52,7 +52,6 @@ public class DBConnector {
 	}
 	
 	public static List<Auction> findAuctionByBookName(String bookName, int personId) {
-
 		Query query = session.createQuery("select aa from Auction as aa inner join aa.book bb where" +
 				" bb.name= :myname and aa.person.id<> :myID");	
 		query.setParameter("myname", bookName);
@@ -63,7 +62,6 @@ public class DBConnector {
 		return result;
 	}
 	public static List<Auction> findAuctionByWriterName(String bookWriter, int personId) {
-
 		Query query = session.createQuery("select aa from Auction as aa inner join aa.book bb where" +
 				" bb.writerName= :myname and aa.person.id<> :myID");	
 		query.setParameter("myname", bookWriter);
@@ -86,9 +84,9 @@ public class DBConnector {
 		return result;
 	}
 	public static List<Auction> findAuctionByOwnerID(int personId) {
-		System.out.println("Hello I am findAuctionByOwner in DBConnector .");
-		Query query = session.createQuery("select from Auction as aa where" +
-				" aa.id= :myID");	
+		//System.out.println("Hello I am findAuctionByOwner in DBConnector .");
+		Query query = session.createQuery("select aa from Auction as aa where" +
+				" aa.person.id= :myID");	
 		query.setParameter("myID", personId);
 
 		@SuppressWarnings("unchecked")
@@ -96,9 +94,8 @@ public class DBConnector {
 		return result;
 	}
 	public static List<Auction> findAuctionForPerson(int personId) {
-
-		Query query = session.createQuery("select from Auction as aa where" +
-				" aa.id<> :myID");	
+		Query query = session.createQuery("select aa from Auction as aa where" +
+				" aa.person.id<> :myID");	
 		query.setParameter("myID", personId);
 
 		@SuppressWarnings("unchecked")
@@ -107,7 +104,7 @@ public class DBConnector {
 	}
 	public static List<Auction> findRecentlyAddedAuctions(Date now) {
 		Date past = new Date(now.getTime()-864000000);
-		Query query = session.createQuery("select from Auction as aa where" +
+		Query query = session.createQuery("select aa from Auction as aa where" +
 				" aa.startDate> :past and aa.endDate< :now ");	
 		query.setParameter("now", now);
 		query.setParameter("past", past);
@@ -117,7 +114,7 @@ public class DBConnector {
 		return result;
 	}
 	public static Person getPersonByMail(String mail) throws PersonNotFoundException {
-		Query query = session.createQuery("from person as p where p.mail = :m");
+		Query query = session.createQuery("select p from Person as p where p.mail = :m");
 		query.setParameter("m", mail);
 		@SuppressWarnings("unchecked")
 		List<Person> result = query.list();
@@ -125,7 +122,10 @@ public class DBConnector {
 			throw new PersonNotFoundException("Person not found in getPersonByMail method in DBConnector .");
 		}
 		if(result.size() > 1)
+		{
 			System.out.println("Inconsistency in DB . ");
+			throw new PersonNotFoundException("More than 1 person with same mail found .");
+		}
 		return result.get(0);
 	}
 	public static boolean personWithIdHasBook(int sellerId, String bookName, String bookWriter, int publishYear) throws BookIsExist {
@@ -143,5 +143,11 @@ public class DBConnector {
 		if(result.size()==1)
 			return true;
 		return false;
+	}
+	public static List<Person> getAllPersons() {
+		Query query = session.createQuery("select aa from Person as aa");	
+		@SuppressWarnings("unchecked")
+		List<Person> result = query.list();
+		return result;
 	}
 }

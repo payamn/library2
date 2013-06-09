@@ -9,7 +9,7 @@ public class ShowUserList {
 
 	public String execute(HttpServletRequest req, HttpServletResponse response) {
 
-		req.setAttribute("users", Library.getProfiles());
+		req.setAttribute("users", Library.getAllPersons());
 		req.setAttribute("personId",Integer.parseInt(req.getParameter("personId")));
 		return "ListOfUsers.jsp";
 	}
