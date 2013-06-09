@@ -40,6 +40,11 @@ public class DBConnector {
 		session.save(auction);
 		session.getTransaction().commit();
 	}
+	public static void updateAuction(Auction auction) {
+		session.beginTransaction();
+		session.update(auction);
+		session.getTransaction().commit();
+	}
 	public static void savePerson(Person person) {
 		session.beginTransaction();
 		session.save(person);

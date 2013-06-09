@@ -185,8 +185,18 @@ public class App {
 		// List<Person> getAllPersons()
 		System.out.println("getAllPersons : 4="+DBConnector.getAllPersons().size());
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		//createAuction
-		Library.createAuction(1, "Zaban Omoomi", "Holliday", 1900, "BAD", new Date(), new Date(), 22);
+		// createAuction
+		//Library.createAuction(1, "Zaban Omoomi", "Holliday", 1900, "BAD", new Date(), new Date(), 22);
+		
+		// joinToAuction
+		Library.joinToAuction(4, 1, 100);
+		
+		// finishAuction
+		Library.finishAuction(1, 4, 4);
+		
+		// finishExpiredAuction
+		Library.finishExpiredAuction(3);
+		
 		// END
 		System.out.println("Tests ended successfully .");
 	}

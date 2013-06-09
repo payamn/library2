@@ -76,8 +76,7 @@ public class Auction {
 	}
 	public void finishSuccessfulAuction(Person winner) {
 		/// expire nashode bashe ghablan !
-		this.isFinished = true;
-		
+		this.isFinished = true;	
 		for(Offer of : offers) {
 			if(of.getPerson().getId() == winner.getId()) {
 				MailSender.sendAuctionSuccessMailToWinner(of.getPerson(),this.getPerson().getMail(),of.getPerson().getName());
@@ -92,8 +91,7 @@ public class Auction {
 	public void finishExpiredAuction() {
 		this.isFinished = true;
 		for(Offer of : offers) {
-			MailSender.sendFinishedAuctionMail(of.getPerson(),of.getPerson().getName());
-			
+			MailSender.sendFinishedAuctionMail(of.getPerson(),of.getPerson().getName());		
 		}
 		MailSender.sendAuctionExpiredMailToOwner(this.person, this.getPerson().getName());
 	}

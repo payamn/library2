@@ -51,7 +51,8 @@ public class Library {
 		Person person = DBConnector.getPerson(personId);
 		auction.checkValidPrice(price);
 		Offer offer = new Offer(price, new Date());
-		//offer.setPerson(person);
+		auction.addOffer(offer);
+		offer.setPerson(person);
 		person.addOffer(offer);
 		DBConnector.updatePerson(person);
 		//DBConnector.saveOffer(offer);
@@ -65,17 +66,16 @@ public class Library {
 		Person person = DBConnector.getPerson(personId);
 		person.increaseRate();
 		auction.finishSuccessfulAuction(person);
-		DBConnector.saveAuction(auction);
-		DBConnector.savePerson(seller);
-		DBConnector.savePerson(person);
+		DBConnector.updateAuction(auction);
+		DBConnector.updatePerson(seller);
+		DBConnector.updatePerson(person);
 	}
 	public static void finishExpiredAuction(int auctionId) throws AuctionNotFoundException {
 		Auction auction = DBConnector.getAuction(auctionId);
-		auction.getPerson().increaseRate();
-		auction.getPerson().increaseRate();
+		auction.getPerson().deacreaseRate();
 		auction.finishExpiredAuction();
-		DBConnector.saveAuction(auction);
-		DBConnector.savePerson(auction.getPerson());
+		DBConnector.updateAuction(auction);
+		DBConnector.updatePerson(auction.getPerson());
 	}
 	
 	public static Auction getAuctionById(int auctionId) throws AuctionNotFoundException {
