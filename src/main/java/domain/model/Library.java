@@ -13,17 +13,14 @@ import domain.exceptions.closeTimeException;
 import domain.exceptions.priceException;
 
 public class Library {
-	public static Auction getAuctionById(int auctionId) throws AuctionNotFoundException {
-		return DBConnector.getAuction(auctionId);  
-	}
+
 	public static void createAuction(int sellerId,String bookName,String bookWriter
 			,int publishYear,String qualityStr,Date startDate,Date endDate,int price)
 					throws BookIsExist, PersonNotFoundException {
-
-
+		
 		if(DBConnector.personWithIdHasBook(sellerId, bookName, bookWriter, publishYear))
 			throw new BookIsExist("BookIsExist Exception : Book with this owner is exist in DB .");
-
+		
 		Quality quality=Quality.GOOD ;
 		if(qualityStr.equalsIgnoreCase("BAD"))
 			quality=Quality.BAD;
@@ -80,23 +77,26 @@ public class Library {
 		DBConnector.saveAuction(auction);
 		DBConnector.savePerson(auction.getPerson());
 	}
+	
+	public static Auction getAuctionById(int auctionId) throws AuctionNotFoundException {
+		return DBConnector.getAuction(auctionId);  
+	}
 	public static List<Auction> searchAuctionByBookName(int personId,String bookName) {
 		return DBConnector.findAuctionByBookName(bookName, personId);
 	}
 	public static List<Auction> searchAuctionByBookWriter(int personId,String bookWriter) {
 		return DBConnector.findAuctionByWriterName(bookWriter, personId);
-
 	}
 	public static List<Auction> searchAuctionByOwner(int personId,String SellerFirstName,String SellerLastName) {
-		return(DBConnector.findAuctionByOwnerName(SellerFirstName, SellerLastName, personId));
+		return DBConnector.findAuctionByOwnerName(SellerFirstName, SellerLastName, personId);
 	}
-	public static  List<Auction> getActiveAuctionByOwner(int sellerId) throws PersonNotFoundException {
-		System.out.println("Hello I am getActiveAuctionByOwner in Library .");
-		System.out.println("getActiveAuctionByOwner in Library : "+sellerId);
-		return (DBConnector.findAuctionByOwnerID(sellerId));
+	public static List<Auction> getActiveAuctionByOwner(int sellerId) throws PersonNotFoundException {
+		//System.out.println("Hello I am getActiveAuctionByOwner in Library .");
+		//System.out.println("getActiveAuctionByOwner in Library : "+sellerId);
+		return DBConnector.findAuctionByOwnerID(sellerId);
 	}
 	public static List<Auction>  searchAllAvailableAuctionsOfPerson(int personId) throws PersonNotFoundException {
-		return (DBConnector.findAuctionForPerson(personId));
+		return DBConnector.findAuctionForPerson(personId);
 	}
 	public static int getIdByMail(String mail) throws PersonNotFoundException {
 		return DBConnector.getPersonByMail(mail).getId();
@@ -104,7 +104,7 @@ public class Library {
 	public static List<Auction> getRecentlyAddedAuctions(Date date) {
 		return DBConnector.findRecentlyAddedAuctions(date);
 	}
-	public static List<Person> getProfiles() {
-		return null;
+	public static List<Person> getAllPersons() {
+		return DBConnector.getAllPersons();
 	}
 }
