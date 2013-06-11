@@ -24,7 +24,7 @@ public class FrontController extends HttpServlet {
 			if(index<0) {
 				if (request.getServletPath().indexOf("Logout")>=0){
 					request.getSession().invalidate();
-					response.sendRedirect("/library2/login.jsp");
+					response.sendRedirect("/library2/Bookstore.jsp");
 				}
 					
 				ctrlClass = Class.forName("controller.home");

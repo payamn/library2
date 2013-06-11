@@ -21,7 +21,7 @@
   <link rel="shortcut icon" href="img/icon-small.jpg">
   <script src="js/jquery.min.js"></script>
     <script>
-      $(function() {
+      /*$(function() {
         
         var pID = $("div#pID").html();
         if(pID == null || pID == "")
@@ -33,7 +33,7 @@
         }
         else{
         }
-      });
+      });*/
     </script>
 </head>
 
@@ -68,11 +68,14 @@
             </li>
           </ul>
           <div id="auth">
-            <form class="navbar-form pull-right">
+            <form id="signin" class="navbar-form pull-right" action="Logout" method="post">
+              <input type="submit" id="signout-btn" class="btn" value="Sign out"/>
+            </form>
+            <!--<form class="navbar-form pull-right">
               <input id="email" class="span2" type="text" placeholder="Email">
               <input id="password" class="span2" type="password" placeholder="Password">
               <button id="signin-btn" type="submit" class="btn">Sign in</button>
-            </form>
+            </form>-->
           </div>
         </div>
       </div>

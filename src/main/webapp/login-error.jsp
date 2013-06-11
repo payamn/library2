@@ -4,12 +4,6 @@
     Author     : aryaz
 --%>
 
-<%-- 
-    Document   : login
-    Created on : Jun 3, 2013, 5:33:22 PM
-    Author     : aryaz
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
