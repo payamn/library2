@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/REALM">
+<Context antiJARLocking="true" path="/librarydb">
   <!-- works! -->
   <Resource name="jdbc/librarydb"
             type="javax.sql.DataSource"

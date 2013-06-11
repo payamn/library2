@@ -25,7 +25,6 @@ public class Login{
 			System.out.print("4");
 			req.setAttribute("name", person.getName());
 			System.out.print("5");
-			
 			req.setAttribute("message", "choice your book!!!!!!!! ");
 			System.out.print("6");
 		}catch(PersonNotFoundException e){
@@ -36,9 +35,8 @@ public class Login{
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		//List<Auction> auctions=new ArrayList<Auction> ();
 		List<Auction> auctions=Library.getRecentlyAddedAuctions(sdf.parse("01-05-2013"));
-
 		req.setAttribute("auctions", auctions);
 		System.out.print("end of login !");
-		return "Bookstore.jsp";	
+		return "Bookstore.jsp";
 	}
 }

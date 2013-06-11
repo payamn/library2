@@ -11,6 +11,10 @@
 		<servlet-name>FrontController</servlet-name>
 		<url-pattern>*.action</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FrontController</servlet-name>
+		<url-pattern>/Logout</url-pattern>
+	</servlet-mapping>
 
 	
 	<context-param>
@@ -25,14 +29,23 @@
 	
 	<context-param>
     	<param-name>password</param-name>
-    	<param-value>123456</param-value>
+    	<param-value>123</param-value>
 	</context-param>
 	
-	</security-constraint>
-		<security-constraint>
+
+	<security-constraint>
 		<web-resource-collection>
-			<web-resource-name>all</web-resource-name>
-				<url-pattern>/*.jsp</url-pattern>
+			<web-resource-name>jsp</web-resource-name>
+				<url-pattern>*.jsp</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>member</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>action</web-resource-name>
+				<url-pattern>*.action</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>member</role-name>
@@ -43,19 +56,17 @@
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<form-login-config>
-			<form-login-page>/WEB-INF/Login.jsp</form-login-page>
-			<form-error-page>/stud/</form-error-page>
+			<form-login-page>/login.jsp</form-login-page>
+			<form-error-page>/login-error.jsp</form-error-page>
 		</form-login-config>
 	</login-config>
 	
 	<!-- Security Roles -->
 	
 	<security-role>
-		<role-name>stu</role-name>
+		<role-name>member</role-name>
 	</security-role>
-	<security-role>
-		<role-name>prof</role-name>
-	</security-role>
+
 	
 	
 </web-app>

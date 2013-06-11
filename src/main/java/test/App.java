@@ -63,7 +63,7 @@ public class App {
 		Auction auction1 = new Auction(book1,new Date(), sdf.parse("10-10-2013"),20 , offersAuction1);
 		Auction auction2 = new Auction(book2,new Date(), sdf.parse("10-07-2013"),30 , offersAuction2);
 		Auction auction3 = new Auction(book3,sdf.parse("10-01-2013"), sdf.parse("10-05-2013"),40 , new HashSet<Offer>());
-
+		
 		Person person1 = new Person(pr1, "payam222@gmail.com", "123456", offersPerson1);
 		Person person2 = new Person(pr2, "pakdel@gmail.com", "123456", offersPerson2);
 		Person person3 = new Person(pr3, "aryaz@gmail.com", "123456", offersPerson3);

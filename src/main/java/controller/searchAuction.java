@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import domain.model.Auction;
 import domain.model.Library;
 
-public class SearchAuction {
+public class searchAuction {
 
 	public String execute(HttpServletRequest req, HttpServletResponse response)
 			throws IOException {
