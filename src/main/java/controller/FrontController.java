@@ -16,7 +16,7 @@ public class FrontController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("dfd");
 		System.out.println("front controllerdfsdlfjldsjf");
-	/*	System.out.println("*"+request.getServletPath()+"*");
+		System.out.println("*"+request.getServletPath()+"*");
 		int index=request.getServletPath().indexOf(".action");
 		String className =null;
 		try {
@@ -42,7 +42,7 @@ public class FrontController extends HttpServlet {
 		} catch (Exception ex) {
 			response.setContentType("text/html");
 			response.getOutputStream().println("There is an error in loading the page .\nSee FrontController.java in controller package ." + ex.getMessage());
-		}*/
+		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
