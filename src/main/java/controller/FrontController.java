@@ -14,22 +14,29 @@ public class FrontController extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("dfd");
-		System.out.println("front controllerdfsdlfjldsjf");
+		System.out.println("front controller   dfsdlfjldsjf");
 		System.out.println("*"+request.getServletPath()+"*");
 		int index=request.getServletPath().indexOf(".action");
 		String className =null;
 		try {
+			System.out.println("in try statement");
 			Class<?> ctrlClass = null;
 			if(index<0) {
+				System.out.println("in first if");
 				if (request.getServletPath().indexOf("Logout")>=0){
 					request.getSession().invalidate();
-					response.sendRedirect("/library2/Bookstore.jsp");
+					System.out.println("logout");
+					String re="/library2/Bookstore.jsp";
+					System.out.println(re);
+					response.sendRedirect(re);
+				
+					System.out.println("after");
 				}
-					
+				System.out.println("after second if");
 				ctrlClass = Class.forName("controller.home");
 			}
 			else {
+				System.out.println("first else");
 				className= request.getServletPath().substring(1, index);
 				ctrlClass = Class.forName("controller." + className);
 			}

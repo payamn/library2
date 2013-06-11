@@ -38,7 +38,7 @@
 </head>
 
 <body>
-  <div id="pID" style="display: none;"><c:out value="${personId}"/></div>
+  <div id="pID" style="display: none;"><% String personId = request.getUserPrincipal().getName(); %></div>
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -121,7 +121,6 @@
               <form action="CloseAuction.action" method="GET">
                 <input type="hidden" name="winnerId" value="${off.person.id}"/>
                 <input type="hidden" name="auctionId" value="${auction.id}"/>
-                <input type="hidden" name="personId" value="<%= request.getParameter("personId") %>"/>
                 <input type="submit" value="select as winner">
               </form>
               </td>

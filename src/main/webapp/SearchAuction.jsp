@@ -40,7 +40,7 @@
 </head>
 
 <body>
-  <div id="pID" style="display: none;"><%= request.getParameter("personId") %></div>
+  <div id="pID" style="display: none;"><% String personId = request.getUserPrincipal().getName(); %></div>
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -88,7 +88,6 @@
     <p>Message: Search for auction. There are three ways provided</p><br>
     <div id="auction" class="hero-unit">
       <form action="SearchAuction.action" method="POST">
-      	<input type="hidden" name="personId" value="<%= request.getParameter("personId") %>"/>
         <p>
           Book Name: <input name="bookName" class="span2" type="text" placeholder="Book Name"/>
           <input type="hidden" name="searchType" value="bookName"/>
@@ -96,7 +95,6 @@
         <button id="search-btn" type="submit" class="btn">Search</button>
       </form>
       <form action="SearchAuction.action" method="POST">
-        <input type="hidden" name="personId" value="<%= request.getParameter("personId") %>"/>
         <p>
           Writer's First Name: <input name="writerName" class="span2" type="text" placeholder="Writer's First Name"/>
         </p>
@@ -107,7 +105,6 @@
         <button id="search-btn" type="submit" class="btn">Search</button>
       </form>
       <form action="SearchAuction.action" method="POST">
-        <input type="hidden" name="personId" value="<%= request.getParameter("personId") %>"/>
         <p>
           Seller's First Name: <input name="sellerName" class="span2" type="text" placeholder="Seller's First Name"/>
         </p>

@@ -40,7 +40,7 @@
 </head>
 
 <body>
-  <div id="pID" style="display: none;"><%= request.getParameter("personId") %></div>
+  <div id="pID" style="display: none;"><%= request.getUserPrincipal().getName() %></div>
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -90,7 +90,6 @@
     </p><br>
     <div id="auction" class="hero-unit">
       <form action="CreateAuction.action">
-      	<input type="hidden" name="personId" value="<%= request.getParameter("personId") %>"/>
         <p>
           Book Name: <input name="bookName" id="bookname" class="span2" type="text" placeholder="Book Name"/>
         </p>

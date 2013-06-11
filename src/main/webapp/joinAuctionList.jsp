@@ -46,7 +46,7 @@
   </script>
 </head>
 <body>
-  <div id="pID" style="display: none;"><%= request.getAttribute("personId") %></div>
+  <div id="pID" style="display: none;"><% String personId = request.getUserPrincipal().getName(); %></div>
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -127,7 +127,6 @@
      <td>
        <form action="JoinAuction.action" method="POST">
         <input type="text" name="price"/>
-        <input type="hidden" name="personId" value="<%= request.getParameter("personId") %>"/>
         <input type="hidden" name="auctionId" value="<c:out value="${auc.id}"/>">
 		<input type="hidden" name="sourceOfReq" value="joinAuctionList.jsp">
         <input type="submit" value="join"/>

@@ -38,7 +38,7 @@
   </script>
 </head>
 <body>
-  <div id="pID" style="display: none;"><%= request.getAttribute("personId") %></div>
+  <div id="pID" style="display: none;"><%= request.getUserPrincipal().getName() %></div>
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -121,7 +121,6 @@
        
        <form action="ShowOffers.action" method="POST">
         <input type="hidden" name="auctionId" value="${auc.id}">
-        <input type="hidden" name="personId" value="<%= request.getParameter("personId") %>">
         <td><input type="submit" value="close"></td>
       </form>
     </tr>

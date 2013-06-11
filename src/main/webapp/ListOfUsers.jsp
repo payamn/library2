@@ -38,7 +38,7 @@
 </head>
 
 <body>
-  <div id="pID" style="display: none;"><c:out value="${personId}"/></div>
+  <div id="pID" style="display: none;"><% String personId = request.getUserPrincipal().getName(); %></div>
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -102,8 +102,7 @@
             <td>
               
 			  <c:url var="showProfile"   value ="Profile.jsp" >
-				
-				<c:param  name ="personId"  value="${personId}" />
+			
 				<c:param  name ="mail"  value="${person.mail}" />
 				<c:param  name ="lastName"  value="${person.profile.lastName}" />
 				<c:param  name ="firstName"  value="${person.profile.firstName}" />

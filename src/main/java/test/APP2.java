@@ -11,12 +11,12 @@ public class APP2 {
 		Date end= new Date();
 		end.setDate(end.getDate()+2);
 		end.setSeconds(end.getSeconds()+20);
-		try {
+		/*try {
 			Library.createAuction(1, "hasanbook", "hasan",  1990, "BAD",  new Date(), end, 1000);
 		} catch (BookIsExist | PersonNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 	}
 }
