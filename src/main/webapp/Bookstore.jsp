@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=windows-1256" pageEncoding="windows-1256"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="domain.*"%>
 <%@page import="java.util.*"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -133,10 +133,12 @@
     <div class="container">
 	<!--style="width:35%;float:left" -->
       <div   class="hero-unit" >
-        <p>Message:
-			<%= request.getAttribute("message")%>
+        <p>
+        	<% if (request.getAttribute("message") != null && request.getAttribute("message") != "") {%>
+			<%= "Message: " + request.getAttribute("message")%>
+			<% } %>
         </p><br>
-        <h1>Hello!  <%= request.getAttribute("name")%> </h1>
+        <h1>Hello <%= ((request.getAttribute("name") == null)?"Newbie":request.getAttribute("name")) %>!</h1>
         <p>This is the place for all the book lovers.</p>
  
 		
@@ -217,7 +219,8 @@
 			<c:forEach var="auc" items="${auctions}">
 			   <tr>
 			     
-				 <td><c:out value="${auc.book.name}"/></td>
+				
+					 <td><c:out value="${auc.book.name}"/></td>
 				 <td><c:out value="${auc.person.name}"/></td>
 				 
 				 <td><c:out value="${auc.book.writerName}"/></td>
@@ -227,6 +230,8 @@
 				 <td><c:out value="${auc.endDate}"/></td>
 				 <td><c:out value="${auc.minPrice}"/></td>
 				 <td><c:out value="${auc.maxOfferPrice}"/></td>
+				
+				
 				 <c:choose>
 					<c:when test="${auc.person.id== personId}">
 						<form action="ShowOffers.action" method="POST">
@@ -247,6 +252,10 @@
 					</c:otherwise>
 					
 				</c:choose>	 
+				 
+				
+				 
+					 
 				 
 				</tr>
 			</c:forEach> 

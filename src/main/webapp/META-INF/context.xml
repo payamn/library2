@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/*.jsp">
+<Context antiJARLocking="true" path="/REALM">
   <!-- works! -->
-  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" maxActive="8" maxIdle="4" maxWait="10000" name="jdbc/realm" password="root" type="javax.sql.DataSource" url="jdbc:mysql://127.0.0.1:3306/library2" username="root"/>
+  <Resource name="jdbc/librarydb"
+            type="javax.sql.DataSource"
+            factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+            driverClassName="com.mysql.jdbc.Driver"
+            url="jdbc:mysql://127.0.0.1:3306/librarydb"
+            username="root"
+            password="123"
+            maxActive="8"
+            maxIdle="4"
+            maxWait="10000"
+            auth="Container"
+          />
   <!-- Does not seem to work?! -->
-  <Realm className="org.apache.catalina.realm.DataSourceRealm" dataSourceName="jdbc/realm" localDataSource="true" roleNameCol="role_name" userCredCol="user_pass" userNameCol="user_name" userRoleTable="user_roles" userTable="users"/>
+  <Realm className="org.apache.catalina.realm.DataSourceRealm"
+         dataSourceName="jdbc/librarydb"
+         userTable="person" 
+         userNameCol="mail" 
+         userCredCol="password"
+         userRoleTable="person" 
+         roleNameCol="roleName"
+         localDataSource="true"/>
 </Context>
