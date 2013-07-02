@@ -103,8 +103,8 @@
       
       <td>minimom price</td>
       <td>maximom offer</td>
-      <td>your price</td>
-      <td> Join</td>
+      <td>your offer</td>
+    
     </tr>
     
     <c:forEach var="auc" items="${auctions}">
@@ -121,10 +121,11 @@
      <td><c:out value="${auc.minPrice}"/></td>
      <td><c:out value="${auc.maxOfferPrice}"/></td>
      <td>
-       <form action="JoinAuction.action" method="GET">
+       <form action="JoinAuction.action" method="POST">
         <input type="text" name="price"/>
         <input type="hidden" name="personId" value="<%= request.getParameter("personId") %>"/>
         <input type="hidden" name="auctionId" value="<c:out value="${auc.id}"/>">
+		<input type="hidden" name="sourceOfReq" value="joinAuctionList.jsp">
         <input type="submit" value="join"/>
       </form>
     </td>

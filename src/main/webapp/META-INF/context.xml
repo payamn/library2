@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/library2">
+<Context antiJARLocking="true" path="/*.jsp">
   <!-- works! -->
   <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" maxActive="8" maxIdle="4" maxWait="10000" name="jdbc/realm" password="root" type="javax.sql.DataSource" url="jdbc:mysql://127.0.0.1:3306/library2" username="root"/>
   <!-- Does not seem to work?! -->

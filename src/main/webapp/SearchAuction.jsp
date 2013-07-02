@@ -84,7 +84,7 @@
   <div class="container">
     <p>Message: Search for auction. There are three ways provided</p><br>
     <div id="auction" class="hero-unit">
-      <form action="searchAuction.action">
+      <form action="SearchAuction.action" method="POST">
       	<input type="hidden" name="personId" value="<%= request.getParameter("personId") %>"/>
         <p>
           Book Name: <input name="bookName" class="span2" type="text" placeholder="Book Name"/>
@@ -92,7 +92,7 @@
         </p>
         <button id="search-btn" type="submit" class="btn">Search</button>
       </form>
-      <form action="searchAuction.action">
+      <form action="SearchAuction.action" method="POST">
         <input type="hidden" name="personId" value="<%= request.getParameter("personId") %>"/>
         <p>
           Writer's First Name: <input name="writerName" class="span2" type="text" placeholder="Writer's First Name"/>
@@ -103,7 +103,7 @@
         <input type="hidden" name="searchType" value="bookWriterName"/>
         <button id="search-btn" type="submit" class="btn">Search</button>
       </form>
-      <form action="searchAuction.action">
+      <form action="SearchAuction.action" method="POST">
         <input type="hidden" name="personId" value="<%= request.getParameter("personId") %>"/>
         <p>
           Seller's First Name: <input name="sellerName" class="span2" type="text" placeholder="Seller's First Name"/>

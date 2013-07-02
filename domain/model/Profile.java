@@ -23,21 +23,18 @@ public class Profile {
 	//@PrimaryKeyJoinColumn
 	private Person person;
 	*/
-	private String picName;
 	private String firstName;
 	private String lastName;
 	private int rate;
 	private Date joinDate;
-	private int age;
+
 	public Profile() {
 	}
-	public Profile(String firstName, String lastName, Date joinDate,int age,String picName) {
+	public Profile(String firstName, String lastName, Date joinDate) {
 		this.rate = 0;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.joinDate = joinDate;
-		this.age=age;
-		this.picName=picName;
 	}
 	public void increaseRate() {
 		rate ++;
@@ -58,17 +55,5 @@ public class Profile {
 	public String toString() {
 		return "Profile [id=" + id + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", rate=" + rate + ", joinDate=" + joinDate + "]";
-	}
-	public Date getJoinDate(){
-		return joinDate;
-	}
-	public int getAge(){
-		return age;
-	}
-	public int getRate(){
-		return rate;
-	}
-	public String getPicName(){
-		return picName;
 	}
 }

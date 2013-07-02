@@ -32,8 +32,10 @@ public class joinShowAuctions {
 		}
 		System.out.print("after joiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiin"+auctions.size());
 		req.setAttribute("auctions",auctions );
+		if(req.getAttribute("message")==null)
 		req.setAttribute("message", "please select your choice!");
 		System.out.println("end show list "+auctions.size());
+		
 		return "joinAuctionList.jsp";
 	}
 }

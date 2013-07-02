@@ -46,7 +46,4 @@ public class Offer {
 		return "Offer [id=" + id + ", person=" + person + ", price=" + price
 				+ ", offerDate=" + offerDate + "]";
 	}
-	public int getId(){
-		return id;
-	}
 }

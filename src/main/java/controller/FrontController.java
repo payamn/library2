@@ -26,6 +26,7 @@ public class FrontController extends HttpServlet {
 			
 			Method m = ctrlClass.getMethod("execute", HttpServletRequest.class, HttpServletResponse.class);
 			String forward = (String)m.invoke(ctrlClass.newInstance(), request, response);
+			
 			request.getRequestDispatcher(forward).forward(request, response);
 		} catch (Exception ex) {
 			response.setContentType("text/html");

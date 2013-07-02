@@ -7,6 +7,8 @@
 <head>
   <meta charset="utf-8">
   <title>Bookstore</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="select winner">
   <meta name="author" content="">
@@ -20,6 +22,7 @@
   </style>
   <link href="css/bootstrap-responsive.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet" type="text/css"/>
+  <link href="style/style.css" rel="stylesheet" type="text/css"/>
   <link rel="shortcut icon" href="img/icon-small.jpg">
   <script src="js/jquery.min.js"></script>
     <script>
@@ -83,18 +86,22 @@
 
     <div class="container">
     <div id="users" class="hero-unit">
-      <p><b>
-	                   Profile of 	<c:out value= "${profile.firstName }"/>  <c:out value= "${profile.lastName}"/>
+	   <p><b>
+	                   Profile of 	"<%= request.getParameter("firstName") %>"  "<%= request.getParameter("lastName") %>"
       </b></p>
+		  
 	  <p>
-	  Picture :   <div id=<c:out value= "${profile.mail }"/>></div>
+	  Picture :   <div id= "<%= request.getParameter("picName") %>"><br/><br/></div>
 	  </p> 
-      <p>First name :  <c:out value= "${profile.firstName }"/></p>
-	  <p>Last Name :  <c:out value= "${profile.lastName}"/></p>
-	  <p>Email address : <c:out value= "${profile.mail}"/></p>
-	  <p>Age : <c:out value= "${profile.age}"/></p>
-	  <p>Rating : <c:out value= "${profile.rate}"/></p>
-	  <p>Join Date : <c:out value= "${profile.joinDate}"/></p>
+		<p>First name : "<%= request.getParameter("firstName") %>" </p>
+	  <p>Last Name :  "<%= request.getParameter("lastName") %>" </p>
+	  <p>Email address : "<%= request.getParameter("mail") %>" </p>
+	    <p>Age : "<%= request.getParameter("age") %>"</p>
+	  <p>Rating : "<%= request.getParameter("rate") %>"</p>
+	  <p>Join Date : "<%= request.getParameter("joinDate") %>"</p>
+ 
+  
+	
 	  
     </div>
 

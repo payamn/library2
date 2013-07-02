@@ -93,16 +93,25 @@
 		</td>
 
         </tr>
-        <c:forEach var="profile" items="${profiles}">
+        <c:forEach var="person" items="${users}">
           <tr>
           
             <td>
               
 			  <c:url var="showProfile"   value ="Profile.jsp" >
-				<c:param  name ="profile"  value="${profile}" />
+				
+				<c:param  name ="personId"  value="${personId}" />
+				<c:param  name ="mail"  value="${person.mail}" />
+				<c:param  name ="lastName"  value="${person.profile.lastName}" />
+				<c:param  name ="firstName"  value="${person.profile.firstName}" />
+				<c:param  name ="rate"  value="${person.profile.rate}" />
+				<c:param  name ="joinDate"  value="${person.profile.joinDate}" />
+				<c:param  name ="age"  value="${person.profile.age}" />
+				<c:param  name ="picName"  value="${person.profile.picName}" />
+				
 				
 			  </c:url>
-			  <a href="${showProfile}"><c:out value= "${profile.firstName }"/>  <c:out value= "${profile.lastName}"/></a>
+			  <a href="${showProfile}"><c:out value= "${person.profile.firstName }"/>  <c:out value= "${person.profile.lastName}"/></a>
 			  
             </td>
             

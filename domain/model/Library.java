@@ -1,12 +1,10 @@
 package domain.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
 import domain.scheduler.*;
-import domain.database.Context;
 import domain.database.DBConnector;
 import domain.exceptions.AuctionNotFoundException;
 import domain.exceptions.BookIsExist;
@@ -45,7 +43,6 @@ public class Library {
 		warnDate.setTime(endDate.getTime()-172800000);
 		JobScheduler.createNewJobEnd(endDate,auction.getId(),bookName,person.getName());
 		JobScheduler.createNewJobWarning(warnDate,auction.getId(),bookName,person.getName(), person.getMail());
-		
 	}
 	public static void joinToAuction(int personId,int auctionId,int price) 
 			throws AuctionNotFoundException, PersonNotFoundException, closeTimeException, priceException {
@@ -55,11 +52,10 @@ public class Library {
 		auction.checkValidPrice(price);
 		Offer offer = new Offer(price, new Date());
 		auction.addOffer(offer);
-	/*	offer.setPerson(person);
+		offer.setPerson(person);
 		person.addOffer(offer);
-		DBConnector.updatePerson(person);*/
+		DBConnector.updatePerson(person);
 		//DBConnector.saveOffer(offer);
-	
 	}
 	public static void finishAuction(int sellerId,int personId,int auctionId)
 			throws AuctionNotFoundException, PersonNotFoundException, closeTimeException {
@@ -73,7 +69,6 @@ public class Library {
 		DBConnector.updateAuction(auction);
 		DBConnector.updatePerson(seller);
 		DBConnector.updatePerson(person);
-	
 	}
 	public static void finishExpiredAuction(int auctionId) throws AuctionNotFoundException {
 		Auction auction = DBConnector.getAuction(auctionId);
@@ -106,26 +101,10 @@ public class Library {
 	public static int getIdByMail(String mail) throws PersonNotFoundException {
 		return DBConnector.getPersonByMail(mail).getId();
 	}
-	public static Person getPersonByMail(String mail) throws PersonNotFoundException {
-		return DBConnector.getPersonByMail(mail);
-	}
-	
 	public static List<Auction> getRecentlyAddedAuctions(Date date) {
 		return DBConnector.findRecentlyAddedAuctions(date);
-		
 	}
-	/*public static List<String> getAllNames() {
-		List <String> names=new ArrayList <String>();
-		List<String> fNames= DBConnector.getAllFirstNames();
-		List<String> lNames=DBConnector.getAllLastNames();
-		for(int i=0;i<fNames.size();i++){
-			names.add(fNames.get(i)+"  "+lNames.get(i));
-		}
-		return names;
-			
-	}*/
 	public static List<Person> getAllPersons() {
 		return DBConnector.getAllPersons();
 	}
-
 }

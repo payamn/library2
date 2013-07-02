@@ -24,7 +24,7 @@ public class Person {
 	@Column(unique = true, nullable = false)
 	private int id;
 	// TODO : is optional=false good ?
-	@OneToOne(/*fetch = FetchType.LAZY,*/ cascade=CascadeType.ALL, optional=false)
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, optional=false)
 	private Profile profile;
 	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade=CascadeType.ALL)
 	private Set<Auction> auctions;

@@ -18,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import domain.database.DBConnector;
 import domain.exceptions.closeTimeException;
 import domain.exceptions.priceException;
 import domain.mail.MailSender;
@@ -31,11 +30,11 @@ public class Auction {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(unique = true, nullable = false)
 	private int id;
-	@OneToOne( cascade=CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	private Book book;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Person person;
-	@OneToMany( fetch=FetchType.LAZY ,cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="auction_id")
 	private Set<Offer> offers;
 	private int minPrice;
@@ -119,37 +118,9 @@ public class Auction {
 	public void setMinPrice(int minPrice) {
 		this.minPrice = minPrice;
 	}
-	public  void addOffer(Person person, int price) throws priceException{
-		System.out.print("assssssshhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-		for(Offer of : offers) {
-			if(of.getPerson().getId()==person.getId()){
-				System.out.print("EEEEEEEEEEEEEEEEEEQQQQQQQQQQQQQQQQUUUUUUUUUUUUUUAAAAAAAAAAAAAAAAAAllllllllllllllll");
-				if( price<=of.getPrice() )
-					
-					throw new priceException("you are not allowed to decrease your bid , please suggest price more than your previous bid : "+of.getPrice());
-				//Offer offer=new Offer(price, new Date());
-					DBConnector.updateOffer(of.getId(),price);
-					return;
-				
-			}
-			
-		}
-		checkValidPrice(price);
-		Offer offer=new Offer(price, new Date());
-		offers.add(offer);
-		offer.setPerson(person);
-		person.addOffer(offer);
-		DBConnector.updatePerson(person);
-		
-		
-	}
-
 	public void checkValidPrice(int price) throws priceException {
-		System.out.println("*******************checkValidPrice : "+price);
-	
 		if (price<minPrice)
-			throw new priceException("your price is less than minimum");
-		
+			throw new priceException("your price is less than minimum");	
 	}
 	public int getId() {
 		return id;

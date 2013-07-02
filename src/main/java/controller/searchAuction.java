@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import domain.model.Auction;
 import domain.model.Library;
 
-public class searchAuction {
+public class SearchAuction {
 
 	public String execute(HttpServletRequest req, HttpServletResponse response)
 			throws IOException {
-		
+		System.out.println("in search auction !!!!!!!!!!!!!!");
 		String searchType=req.getParameter("searchType");
 		List <Auction> auctions = null;
 		int personId=(Integer.parseInt(req.getParameter("personId")));
@@ -44,6 +44,7 @@ public class searchAuction {
 		System.out.print("sssssssssssssssssssssssssssssssssssssssssize"+auctions.size());
 		System.out.println("NUM of auctions "+auctions.size());
 		req.setAttribute("auctions",auctions );
+		req.setAttribute("message", "please enter your price and press button.");
 		req.setAttribute("from", "search");
 		return "joinAuctionList.jsp";	
 	}
